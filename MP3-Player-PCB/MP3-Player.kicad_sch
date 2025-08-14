@@ -62,7 +62,7 @@
 		(instances
 			(project "MP3-Player"
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4"
-					(page "2")
+					(page "1")
 				)
 			)
 		)
@@ -106,7 +106,7 @@
 		(instances
 			(project "MP3-Player"
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4"
-					(page "3")
+					(page "2")
 				)
 			)
 		)
@@ -150,7 +150,7 @@
 		(instances
 			(project "MP3-Player"
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4"
-					(page "4")
+					(page "3")
 				)
 			)
 		)
@@ -194,14 +194,14 @@
 		(instances
 			(project "MP3-Player"
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4"
-					(page "1")
+					(page "0")
 				)
 			)
 		)
 	)
 	(sheet_instances
 		(path "/"
-			(page "0")
+			(page "5")
 		)
 	)
 	(embedded_fonts no)

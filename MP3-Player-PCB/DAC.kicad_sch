@@ -824,7 +824,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "073d8b70-9035-4bed-a4da-7c3f5cd3d6b0")
-		(property "Reference" "J501"
+		(property "Reference" "J401"
 			(at 135.255 58.42 0)
 			(effects
 				(font
@@ -879,7 +879,7 @@
 		(instances
 			(project ""
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/55939feb-9632-43ca-a0aa-b7cf8cf1876d"
-					(reference "J501")
+					(reference "J401")
 					(unit 1)
 				)
 			)
@@ -895,7 +895,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4ed65565-9c97-4e1f-bf6e-6850ea25eb03")
-		(property "Reference" "U501"
+		(property "Reference" "U401"
 			(at 96.1233 50.8 0)
 			(effects
 				(font
@@ -1027,7 +1027,7 @@
 		(instances
 			(project ""
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/55939feb-9632-43ca-a0aa-b7cf8cf1876d"
-					(reference "U501")
+					(reference "U401")
 					(unit 1)
 				)
 			)

@@ -812,26 +812,8 @@
 					)
 				)
 			)
-			(pin power_in line
-				(at -19.05 -36.83 0)
-				(length 2.54)
-				(name "DREG"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin bidirectional line
-				(at -19.05 -39.37 0)
+				(at -19.05 -34.29 0)
 				(length 2.54)
 				(name "FSYNC"
 					(effects
@@ -841,6 +823,24 @@
 					)
 				)
 				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at -19.05 -39.37 0)
+				(length 2.54)
+				(name "DREG"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1049,14 +1049,14 @@
 			(pin power_out line
 				(at 19.05 -16.51 180)
 				(length 2.54)
-				(name "OUT1M"
+				(name "OUT1P"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "19"
+				(number "20"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1067,14 +1067,14 @@
 			(pin power_out line
 				(at 19.05 -19.05 180)
 				(length 2.54)
-				(name "OUT1P"
+				(name "OUT1M"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "20"
+				(number "19"
 					(effects
 						(font
 							(size 1.27 1.27)

@@ -3210,7 +3210,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1111bfe4-7a73-41fa-ae85-c53e6d7a5810")
-		(property "Reference" "#PWR0105"
+		(property "Reference" "#PWR0107"
 			(at 81.28 147.32 0)
 			(effects
 				(font
@@ -3260,7 +3260,7 @@
 		(instances
 			(project "MP3-Player"
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/94b81035-f90d-4565-a117-ac4535135684"
-					(reference "#PWR0105")
+					(reference "#PWR0107")
 					(unit 1)
 				)
 			)
@@ -3785,7 +3785,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "587bb83c-ae62-4245-86da-c07ec13be72b")
-		(property "Reference" "#PWR0108"
+		(property "Reference" "#PWR0106"
 			(at 203.2 85.09 0)
 			(effects
 				(font
@@ -3835,7 +3835,7 @@
 		(instances
 			(project "MP3-Player"
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/94b81035-f90d-4565-a117-ac4535135684"
-					(reference "#PWR0108")
+					(reference "#PWR0106")
 					(unit 1)
 				)
 			)
@@ -3851,7 +3851,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "660e3269-1e7f-4612-bd23-9e0c8da5fc34")
-		(property "Reference" "#PWR0103"
+		(property "Reference" "#PWR0104"
 			(at 72.39 80.01 0)
 			(effects
 				(font
@@ -3901,7 +3901,7 @@
 		(instances
 			(project "MP3-Player"
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/94b81035-f90d-4565-a117-ac4535135684"
-					(reference "#PWR0103")
+					(reference "#PWR0104")
 					(unit 1)
 				)
 			)
@@ -3983,7 +3983,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "749a56b5-6076-4841-9d93-9ae5d754a43d")
-		(property "Reference" "#PWR0106"
+		(property "Reference" "#PWR0108"
 			(at 110.49 147.32 0)
 			(effects
 				(font
@@ -4033,7 +4033,7 @@
 		(instances
 			(project ""
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/94b81035-f90d-4565-a117-ac4535135684"
-					(reference "#PWR0106")
+					(reference "#PWR0108")
 					(unit 1)
 				)
 			)
@@ -4534,7 +4534,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e200e384-05a8-41d2-a0af-dc4d3e946c9a")
-		(property "Reference" "#PWR0107"
+		(property "Reference" "#PWR0103"
 			(at 203.2 59.69 0)
 			(effects
 				(font
@@ -4584,7 +4584,7 @@
 		(instances
 			(project "MP3-Player"
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/94b81035-f90d-4565-a117-ac4535135684"
-					(reference "#PWR0107")
+					(reference "#PWR0103")
 					(unit 1)
 				)
 			)
@@ -4600,7 +4600,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e647b517-47c9-4c07-bded-76d31563468b")
-		(property "Reference" "#PWR0104"
+		(property "Reference" "#PWR0105"
 			(at 78.74 80.01 0)
 			(effects
 				(font
@@ -4650,7 +4650,7 @@
 		(instances
 			(project "MP3-Player"
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/94b81035-f90d-4565-a117-ac4535135684"
-					(reference "#PWR0104")
+					(reference "#PWR0105")
 					(unit 1)
 				)
 			)

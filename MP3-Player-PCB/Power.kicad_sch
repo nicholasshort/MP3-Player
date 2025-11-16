@@ -3359,6 +3359,18 @@
 		)
 		(uuid "e4076020-8358-40b6-9bed-4fa080327c80")
 	)
+	(text "3.7V <= VSYS <= 4.2V"
+		(exclude_from_sim no)
+		(at 263.652 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+				(bold yes)
+			)
+		)
+		(uuid "fc84dc12-8d78-4225-93bc-3e17846cf350")
+	)
 	(text "Set REG01[3:1] = 111 to set VSYS_MIN to 3.7 for max LDO overhead"
 		(exclude_from_sim no)
 		(at 250.444 27.686 0)
@@ -8372,7 +8384,7 @@
 				)
 			)
 		)
-		(property "Value" "FerriteBead"
+		(property "Value" "120R"
 			(at 46.9392 123.19 90)
 			(effects
 				(font
@@ -9266,7 +9278,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "56k"
 			(at 104.14 87.6299 0)
 			(effects
 				(font
@@ -9787,7 +9799,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "56k"
 			(at 67.31 87.6299 0)
 			(effects
 				(font
@@ -10881,7 +10893,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "56k"
 			(at 111.76 113.0299 0)
 			(effects
 				(font

@@ -2284,6 +2284,16 @@
 	)
 	(wire
 		(pts
+			(xy 128.27 74.93) (xy 139.7 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20d16e29-cd10-4656-a206-1d5c9dd29364")
+	)
+	(wire
+		(pts
 			(xy 48.26 49.53) (xy 48.26 52.07)
 		)
 		(stroke
@@ -2341,6 +2351,16 @@
 			(type default)
 		)
 		(uuid "4131f577-5ca6-4ea6-91db-695d76a3e806")
+	)
+	(wire
+		(pts
+			(xy 128.27 72.39) (xy 139.7 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "41ba5436-032b-4f39-88a8-13acc72c664c")
 	)
 	(wire
 		(pts
@@ -2804,6 +2824,26 @@
 	)
 	(wire
 		(pts
+			(xy 128.27 80.01) (xy 139.7 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e3cc6d63-3f8d-49a8-99a2-df3e37e49202")
+	)
+	(wire
+		(pts
+			(xy 128.27 77.47) (xy 139.7 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e49992fa-edf3-4dc5-8642-d0f118f5adf1")
+	)
+	(wire
+		(pts
 			(xy 181.61 62.23) (xy 193.04 62.23)
 		)
 		(stroke
@@ -2954,6 +2994,28 @@
 			)
 		)
 	)
+	(global_label "DAC_FSYNC"
+		(shape output)
+		(at 139.7 72.39 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "19035a7f-c9fb-41be-a5b3-3a1b821209cf")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 153.2686 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "BAT_SDA"
 		(shape bidirectional)
 		(at 88.9 107.95 180)
@@ -2998,6 +3060,28 @@
 			)
 		)
 	)
+	(global_label "DAC_GPO"
+		(shape input)
+		(at 139.7 77.47 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "23ed20c9-c7d9-4499-8a8e-9d3fcac2c13b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 151.1519 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "TIM1_CH1_PWM"
 		(shape output)
 		(at 139.7 82.55 0)
@@ -3011,6 +3095,28 @@
 		(uuid "2862f7d7-6336-4ff2-8556-291cb6a97022")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 156.8365 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DAC_DIN"
+		(shape output)
+		(at 139.7 80.01 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4894d44b-a1fe-4201-9990-09fbe6190093")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 150.4867 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3038,6 +3144,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DAC_BCLK"
+		(shape output)
+		(at 139.7 74.93 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a67d00d9-9de0-457f-94f6-fe2d6f74f6e3")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 152.1195 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)

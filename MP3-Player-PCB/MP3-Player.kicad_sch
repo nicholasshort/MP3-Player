@@ -23,6 +23,16 @@
 		)
 		(uuid "1c877e02-d9df-4335-8d25-8a84c25442a4")
 	)
+	(text "TODO: Add ESD Protection to SD Card and Audio Jack Connectors."
+		(exclude_from_sim no)
+		(at 73.152 106.172 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "b2459177-c2a7-4876-8076-5baf5c4009b1")
+	)
 	(sheet
 		(at 85.09 63.5)
 		(size 26.67 26.67)

@@ -4021,7 +4021,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 60.452 113.03 90)
 			(effects
 				(font
@@ -4428,7 +4428,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MP3-Player_Footprint_Libraries:TF-015"
 			(at 193.04 33.02 0)
 			(effects
 				(font
@@ -4651,7 +4651,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MP3-Player_Footprint_Libraries:1-1825910-4"
 			(at 270.51 36.83 0)
 			(effects
 				(font
@@ -4725,7 +4725,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MP3-Player_Footprint_Libraries:1-1825910-4"
 			(at 220.98 55.88 0)
 			(effects
 				(font
@@ -4799,7 +4799,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MP3-Player_Footprint_Libraries:1-1825910-4"
 			(at 270.51 55.88 0)
 			(effects
 				(font
@@ -4873,7 +4873,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
 			(at 128.27 81.28 0)
 			(effects
 				(font
@@ -5506,7 +5506,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 201.422 55.88 90)
 			(effects
 				(font
@@ -5576,7 +5576,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 201.422 36.83 90)
 			(effects
 				(font
@@ -5646,7 +5646,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 73.152 36.83 90)
 			(effects
 				(font
@@ -5716,7 +5716,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 250.952 36.83 90)
 			(effects
 				(font
@@ -5992,7 +5992,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 250.952 55.88 90)
 			(effects
 				(font
@@ -6266,7 +6266,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 91.44 47.498 90)
 			(effects
 				(font
@@ -6333,7 +6333,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 91.44 57.658 90)
 			(effects
 				(font
@@ -6403,7 +6403,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 82.042 36.83 90)
 			(effects
 				(font
@@ -6539,7 +6539,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 60.452 67.31 90)
 			(effects
 				(font
@@ -6673,7 +6673,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MP3-Player_Footprint_Libraries:1-1825910-4"
 			(at 220.98 36.83 0)
 			(effects
 				(font
@@ -7347,7 +7347,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 47.752 132.08 90)
 			(effects
 				(font
@@ -7479,7 +7479,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 91.44 52.578 90)
 			(effects
 				(font

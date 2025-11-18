@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "MP3-Player_Footprint_Libraries")(type "KiCad")(uri "${KIPRJMOD}/MP3-Player_Footprint_Libraries.pretty")(options "")(descr ""))
+)

@@ -4660,7 +4660,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 111.252 99.06 90)
 			(effects
 				(font
@@ -4803,7 +4803,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0402_1005Metric"
 			(at 99.06 107.95 0)
 			(effects
 				(font
@@ -5014,7 +5014,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 129.54 67.818 90)
 			(effects
 				(font
@@ -5300,7 +5300,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 97.282 99.06 90)
 			(effects
 				(font
@@ -5328,10 +5328,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "fe75132d-0e68-44fa-9a24-7e05a185474c")
+			(uuid "fe75132d-0e68-44fa-9a24-7e05a185474d")
 		)
 		(pin "1"
-			(uuid "fdd62d83-faa8-41f8-b106-ba7a7e0c2c2e")
+			(uuid "fdd62d83-faa8-41f8-b106-ba7a7e0c2c2f")
 		)
 		(instances
 			(project ""
@@ -5791,7 +5791,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 124.46 80.518 90)
 			(effects
 				(font
@@ -7279,7 +7279,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0402_1005Metric"
 			(at 113.03 107.95 0)
 			(effects
 				(font

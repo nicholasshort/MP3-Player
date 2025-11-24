@@ -150,4 +150,15 @@
 		(uuid "296d615a-ee30-4be0-a0ed-13f9a01ec98f")
 	)
 	(embedded_fonts no)
+	(model "${KIPRJMOD}/3D Models/1_1825910_4/c-1-1825910-4-c-3d.stp"
+		(offset
+			(xyz 0 0 9.5)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -90)
+		)
+	)
 )

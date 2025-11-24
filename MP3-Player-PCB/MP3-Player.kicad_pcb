@@ -888,6 +888,17 @@
 				(xyz 0 0 0)
 			)
 		)
+		(model "${KIPRJMOD}/3D Models/qfn-24-1.snapshot.1/QFN 24.STEP"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "Package_TO_SOT_SMD:SOT-23"
 		(layer "F.Cu")
@@ -7040,7 +7051,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "5d46a7ca-b5e7-4d0a-b5bc-613b8cf912f7")
+			(uuid "2c09371d-95fd-4277-b17c-35a8c5d221fa")
 		)
 		(fp_line
 			(start -2.2 -3)
@@ -7050,7 +7061,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "4a9b34fd-733b-487b-a804-ac106bdcc6e8")
+			(uuid "0b719e19-191d-476c-8880-5a09866cf7e6")
 		)
 		(fp_line
 			(start -2.2 3)
@@ -7060,7 +7071,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "82974fc6-178e-4fc1-a275-3f64b28ce474")
+			(uuid "82ce4828-1da9-42e6-8018-6e98311259cd")
 		)
 		(fp_line
 			(start 3 -1.045)
@@ -7070,7 +7081,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "b6156609-aa66-42b3-a900-044c91a84d20")
+			(uuid "820419a2-4404-48cc-bbba-dc5c76d782cf")
 		)
 		(fp_circle
 			(center -3.25 4)
@@ -7081,7 +7092,7 @@
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "f9810e13-acbe-4ae8-9fa6-c34677d78c06")
+			(uuid "cff26855-e4b4-41c8-8fa6-6248f60c7391")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 0 2.5 0)
@@ -7140,6 +7151,17 @@
 			(uuid "6b024346-6603-4262-892a-9ec05716de78")
 		)
 		(embedded_fonts no)
+		(model "${KIPRJMOD}/3D Models/1_1825910_4/c-1-1825910-4-c-3d.stp"
+			(offset
+				(xyz 0 0 9.5)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -0 -0 -90)
+			)
+		)
 	)
 	(footprint "Inductor_SMD:L_Sunlord_SWPA3015S"
 		(layer "F.Cu")
@@ -9998,6 +10020,17 @@
 				(xyz 0 0 0)
 			)
 		)
+		(model "${KIPRJMOD}/3D Models/STM32F411CEU6/UFQFPN-48_7X7X0P55MM.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "Resistor_SMD:R_0402_1005Metric"
 		(layer "F.Cu")
@@ -11385,7 +11418,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "f8ae714f-f585-4ce1-81bf-1d23e0a42ee9")
+			(uuid "3ca9728f-a071-44f6-982b-a7a1b7a58d48")
 		)
 		(fp_line
 			(start -2.2 -3)
@@ -11395,7 +11428,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "fffbad0f-6c0d-40cd-873b-129ee87bf388")
+			(uuid "bd0fc4d5-6019-46d1-970a-4a55a12ca07f")
 		)
 		(fp_line
 			(start -2.2 3)
@@ -11405,7 +11438,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "ec30c8b7-3455-4659-8d2e-e35844e6c810")
+			(uuid "df12684e-484d-4503-bd94-10233271faeb")
 		)
 		(fp_line
 			(start 3 -1.045)
@@ -11415,7 +11448,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "61511603-63ef-4b31-b04b-cc4d19f72e9d")
+			(uuid "36a87fb7-3127-48ed-bfc3-e86c1477560b")
 		)
 		(fp_circle
 			(center -3.25 4)
@@ -11426,7 +11459,7 @@
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "7f7c0862-628d-4e42-9e5a-0ed62f9c1fe5")
+			(uuid "7841c8c5-ec35-44a3-8fb0-ea144c645a73")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 0 2.5 0)
@@ -11485,6 +11518,17 @@
 			(uuid "fd270032-3741-4cdb-b5cc-5453ff286ebf")
 		)
 		(embedded_fonts no)
+		(model "${KIPRJMOD}/3D Models/1_1825910_4/c-1-1825910-4-c-3d.stp"
+			(offset
+				(xyz 0 0 9.5)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -0 -0 -90)
+			)
+		)
 	)
 	(footprint "MP3-Player_Footprint_Libraries:TF-015"
 		(layer "F.Cu")
@@ -15283,7 +15327,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "b826a7a1-1d8f-459c-8eea-1b7ee65f0481")
+			(uuid "274a4f34-c854-4866-843e-588744c509a0")
 		)
 		(fp_line
 			(start -2.2 -3)
@@ -15293,7 +15337,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "03e13043-12d6-4a2f-8085-b37f940e6e2c")
+			(uuid "c74a5fd7-194c-4e44-95e7-da7452a63108")
 		)
 		(fp_line
 			(start -2.2 3)
@@ -15303,7 +15347,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "9f5b2628-0cc7-46b0-af56-b84fb24c0141")
+			(uuid "ccbbe2ad-3b5a-4885-ba2b-67e25f9a7056")
 		)
 		(fp_line
 			(start 3 -1.045)
@@ -15313,7 +15357,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "3a033a05-4a53-41f7-b765-5e56c4bbbf25")
+			(uuid "5fb20b9f-de26-4f92-85b4-e9af725a2b76")
 		)
 		(fp_circle
 			(center -3.25 4)
@@ -15324,7 +15368,7 @@
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "a7597bdb-6548-4c38-8cef-307a8f121400")
+			(uuid "41c40fbd-505e-4b7a-abee-132eb0bb170f")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 0 2.5 0)
@@ -15383,6 +15427,17 @@
 			(uuid "0a9197e9-d0ee-486b-8bb2-d068ba706962")
 		)
 		(embedded_fonts no)
+		(model "${KIPRJMOD}/3D Models/1_1825910_4/c-1-1825910-4-c-3d.stp"
+			(offset
+				(xyz 0 0 9.5)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -0 -0 -90)
+			)
+		)
 	)
 	(footprint "MP3-Player_Footprint_Libraries:TAD5242"
 		(layer "F.Cu")
@@ -16090,6 +16145,17 @@
 				(xyz 0 0 0)
 			)
 		)
+		(model "${KIPRJMOD}/3D Models/qfn-24-1.snapshot.1/QFN 24.STEP"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "Capacitor_SMD:C_0805_2012Metric"
 		(layer "F.Cu")
@@ -16755,7 +16821,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "9e1cea7f-afe4-46bf-990a-dfeb3efce098")
+			(uuid "90142e7e-c54a-4cbf-9588-099a192b5e4a")
 		)
 		(fp_line
 			(start -2.2 -3)
@@ -16765,7 +16831,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "dcf6b91e-c6be-475c-89de-b32122550195")
+			(uuid "0abcd415-0720-435f-b539-2fbcd6bcecf3")
 		)
 		(fp_line
 			(start -2.2 3)
@@ -16775,7 +16841,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "888d9de8-696d-46c7-9ff2-03005209d8f5")
+			(uuid "235f8b53-c90a-497b-ad17-2a2bc183c4f7")
 		)
 		(fp_line
 			(start 3 -1.045)
@@ -16785,7 +16851,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "3a522732-5dd0-44fd-be8a-e2f229f06599")
+			(uuid "5a2a4112-e8fd-4174-b9cc-70b5293732c7")
 		)
 		(fp_circle
 			(center -3.25 4)
@@ -16796,7 +16862,7 @@
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "ad34545e-9726-4027-a5c6-8d3c9a43dab3")
+			(uuid "5b1b8bc7-d697-4277-8e79-ff57d6f622e4")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 0 2.5 0)
@@ -16855,6 +16921,17 @@
 			(uuid "3e7123d4-dc01-4b74-9366-61ec4bc850b2")
 		)
 		(embedded_fonts no)
+		(model "${KIPRJMOD}/3D Models/1_1825910_4/c-1-1825910-4-c-3d.stp"
+			(offset
+				(xyz 0 0 9.5)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -0 -0 -90)
+			)
+		)
 	)
 	(footprint "Capacitor_SMD:C_0805_2012Metric"
 		(layer "F.Cu")
@@ -17894,6 +17971,17 @@
 			)
 			(rotate
 				(xyz 0 0 0)
+			)
+		)
+		(model "${KIPRJMOD}/3D Models/ws2812-2020-1.snapshot.4/WS2812-2020.STEP"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 -0 -0)
 			)
 		)
 	)
@@ -22886,6 +22974,17 @@
 			)
 			(rotate
 				(xyz 0 0 0)
+			)
+		)
+		(model "${KIPRJMOD}/3D Models/ws2812-2020-1.snapshot.4/WS2812-2020.STEP"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 -0 -0)
 			)
 		)
 	)

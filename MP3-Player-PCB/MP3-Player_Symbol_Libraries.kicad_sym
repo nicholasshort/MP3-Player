@@ -278,7 +278,7 @@
 				)
 			)
 			(pin power_in line
-				(at -1.27 -44.45 90)
+				(at -2.54 -44.45 90)
 				(length 2.54)
 				(name "PGND"
 					(effects
@@ -296,7 +296,7 @@
 				)
 			)
 			(pin power_in line
-				(at 1.27 -44.45 90)
+				(at 0 -44.45 90)
 				(length 2.54)
 				(name "PGND"
 					(effects
@@ -306,6 +306,24 @@
 					)
 				)
 				(number "18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 2.54 -44.45 90)
+				(length 2.54)
+				(name "PGND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "25"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1122,7 +1140,7 @@
 				)
 			)
 			(pin power_in line
-				(at -10.16 -50.8 90)
+				(at -12.7 -50.8 90)
 				(length 2.54)
 				(name "VSS"
 					(effects
@@ -1140,7 +1158,7 @@
 				)
 			)
 			(pin power_in line
-				(at -7.62 -50.8 90)
+				(at -10.16 -50.8 90)
 				(length 2.54)
 				(name "VSS"
 					(effects
@@ -1158,7 +1176,7 @@
 				)
 			)
 			(pin power_in line
-				(at -5.08 -50.8 90)
+				(at -7.62 -50.8 90)
 				(length 2.54)
 				(name "VSS"
 					(effects
@@ -1168,6 +1186,24 @@
 					)
 				)
 				(number "A3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at -5.08 -50.8 90)
+				(length 2.54)
+				(name "VSS"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "A4"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1203,7 +1239,7 @@
 						)
 					)
 				)
-				(number "A4"
+				(number "25"
 					(effects
 						(font
 							(size 1.27 1.27)

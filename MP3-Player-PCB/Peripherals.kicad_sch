@@ -9,8 +9,8 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "J"
-				(at -16.51 17.78 0)
+			(property "Reference" "J301"
+				(at 0.635 21.59 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -18,15 +18,14 @@
 				)
 			)
 			(property "Value" "Micro_SD_Card_Det1"
-				(at 16.51 17.78 0)
+				(at 0.635 19.05 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify right)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "MP3-Player_Footprint_Libraries:TF-015"
 				(at 52.07 17.78 0)
 				(effects
 					(font
@@ -175,7 +174,7 @@
 				)
 				(polyline
 					(pts
-						(xy 16.51 15.24) (xy 16.51 16.51) (xy -19.05 16.51) (xy -19.05 -16.51) (xy 16.51 -16.51) (xy 16.51 -8.89)
+						(xy 16.51 15.24) (xy 16.51 16.51) (xy -19.05 16.51) (xy -19.05 -22.86) (xy 16.51 -22.86) (xy 16.51 -8.89)
 					)
 					(stroke
 						(width 0.254)
@@ -360,6 +359,60 @@
 						)
 					)
 					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 20.32 -15.24 180)
+					(length 3.81)
+					(name "SHIELD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 20.32 -17.78 180)
+					(length 3.81)
+					(name "SHIELD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 20.32 -20.32 180)
+					(length 3.81)
+					(name "SHIELD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2348,6 +2401,12 @@
 		(uuid "0a3a6fa5-55fb-4100-a8e6-763ddbfcfc9a")
 	)
 	(junction
+		(at 163.83 66.04)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "183125e2-9c6f-4926-acf6-828ad05126e0")
+	)
+	(junction
 		(at 228.6 44.45)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2402,6 +2461,12 @@
 		(uuid "7431f83e-141e-4a34-bd60-74b2712c73de")
 	)
 	(junction
+		(at 163.83 68.58)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7e0257d5-047d-4c5a-abab-4fe161662ae7")
+	)
+	(junction
 		(at 111.76 43.18)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2418,6 +2483,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9752764b-424a-43dd-8226-53c01e355eb8")
+	)
+	(junction
+		(at 163.83 71.12)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "97e86f3e-3ec1-469e-b3ce-91d629498abf")
 	)
 	(junction
 		(at 203.2 60.96)
@@ -2619,6 +2690,16 @@
 	)
 	(wire
 		(pts
+			(xy 163.83 63.5) (xy 163.83 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1356330a-6540-425c-b2f2-aa7d83221e0e")
+	)
+	(wire
+		(pts
 			(xy 228.6 60.96) (xy 228.6 63.5)
 		)
 		(stroke
@@ -2639,6 +2720,16 @@
 	)
 	(wire
 		(pts
+			(xy 161.29 68.58) (xy 163.83 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1526fe1a-aa05-45cc-9e02-95220773e971")
+	)
+	(wire
+		(pts
 			(xy 106.68 87.63) (xy 106.68 50.8)
 		)
 		(stroke
@@ -2646,6 +2737,16 @@
 			(type default)
 		)
 		(uuid "1b9687a1-d5be-4f0a-84c2-fc721daddff9")
+	)
+	(wire
+		(pts
+			(xy 161.29 66.04) (xy 163.83 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1bfc4940-896a-4b73-ba0b-a6a0fb92e6e1")
 	)
 	(wire
 		(pts
@@ -2706,6 +2807,16 @@
 			(type default)
 		)
 		(uuid "26b48f42-e9fa-4c51-9285-ca1e7756228a")
+	)
+	(wire
+		(pts
+			(xy 161.29 71.12) (xy 163.83 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2960c7e0-86fb-4e26-832e-07ebf602b132")
 	)
 	(wire
 		(pts
@@ -2906,6 +3017,16 @@
 			(type default)
 		)
 		(uuid "505ed4b8-8e3c-49a7-89e3-e729d4c549e3")
+	)
+	(wire
+		(pts
+			(xy 163.83 66.04) (xy 163.83 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50dd5626-c989-44c1-9383-0e69ff44aa45")
 	)
 	(wire
 		(pts
@@ -3249,6 +3370,16 @@
 	)
 	(wire
 		(pts
+			(xy 163.83 71.12) (xy 163.83 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aa2cd5f0-8d30-4d62-8948-3437e806430a")
+	)
+	(wire
+		(pts
 			(xy 30.48 58.42) (xy 30.48 62.23)
 		)
 		(stroke
@@ -3309,7 +3440,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 64.77) (xy 163.83 63.5)
+			(xy 163.83 72.39) (xy 163.83 71.12)
 		)
 		(stroke
 			(width 0)
@@ -4248,7 +4379,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 163.83 64.77 0)
+		(at 163.83 72.39 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4257,7 +4388,7 @@
 		(fields_autoplaced yes)
 		(uuid "149191c4-56ed-4292-855d-7efd2bd42180")
 		(property "Reference" "#PWR0316"
-			(at 163.83 71.12 0)
+			(at 163.83 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4266,7 +4397,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 163.83 69.85 0)
+			(at 163.83 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4274,7 +4405,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 163.83 64.77 0)
+			(at 163.83 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4283,7 +4414,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 163.83 64.77 0)
+			(at 163.83 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4292,7 +4423,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 163.83 64.77 0)
+			(at 163.83 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4638,7 +4769,7 @@
 				(hide yes)
 			)
 		)
-		(pin "10"
+		(pin "12"
 			(uuid "386e2bbf-51e9-4954-8d9c-5579a406eec4")
 		)
 		(pin "4"
@@ -4667,6 +4798,15 @@
 		)
 		(pin "2"
 			(uuid "9deb7012-77b9-4808-a6c4-58027fbd47df")
+		)
+		(pin "13"
+			(uuid "f1d86e0b-3d78-4fb1-9c1a-b16d43e4e395")
+		)
+		(pin "10"
+			(uuid "5c58ff17-89f3-47e5-b64d-22bea01ac259")
+		)
+		(pin "11"
+			(uuid "fe8483f4-378b-43dc-8452-6e2f7c6c52ed")
 		)
 		(instances
 			(project ""
@@ -5056,7 +5196,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
 			(at 128.27 81.28 0)
 			(effects
 				(font

@@ -877,7 +877,7 @@
 					)
 				)
 				(pin power_in line
-					(at -10.16 -50.8 90)
+					(at -12.7 -50.8 90)
 					(length 2.54)
 					(name "VSS"
 						(effects
@@ -895,7 +895,7 @@
 					)
 				)
 				(pin power_in line
-					(at -7.62 -50.8 90)
+					(at -10.16 -50.8 90)
 					(length 2.54)
 					(name "VSS"
 						(effects
@@ -913,7 +913,7 @@
 					)
 				)
 				(pin power_in line
-					(at -5.08 -50.8 90)
+					(at -7.62 -50.8 90)
 					(length 2.54)
 					(name "VSS"
 						(effects
@@ -923,6 +923,24 @@
 						)
 					)
 					(number "A3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -5.08 -50.8 90)
+					(length 2.54)
+					(name "VSS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -958,7 +976,7 @@
 							)
 						)
 					)
-					(number "A4"
+					(number "25"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1893,6 +1911,12 @@
 		(uuid "98a5da2f-3c9d-45fe-b742-c07c7966faf9")
 	)
 	(junction
+		(at 99.06 128.27)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a297691e-9681-42e2-acec-e8503af36e9c")
+	)
+	(junction
 		(at 114.3 55.88)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2025,6 +2049,16 @@
 			(type default)
 		)
 		(uuid "0d877d74-fe8d-48f2-828e-a6967d99392a")
+	)
+	(wire
+		(pts
+			(xy 99.06 127) (xy 99.06 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0e2f7928-8d2c-457a-81ca-9bb4384c9dea")
 	)
 	(wire
 		(pts
@@ -2528,13 +2562,23 @@
 	)
 	(wire
 		(pts
-			(xy 101.6 128.27) (xy 101.6 130.81)
+			(xy 99.06 128.27) (xy 99.06 130.81)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "8588e730-1bc8-4baa-97c5-5df5d902b72f")
+	)
+	(wire
+		(pts
+			(xy 99.06 128.27) (xy 101.6 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8627ff0c-7eae-49b1-a05f-42b70144977d")
 	)
 	(wire
 		(pts
@@ -3332,7 +3376,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
 			(at 210.82 135.89 0)
 			(effects
 				(font
@@ -3879,7 +3923,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 101.6 130.81 0)
+		(at 99.06 130.81 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3888,7 +3932,7 @@
 		(fields_autoplaced yes)
 		(uuid "4e0c6f5c-ddd4-4158-aeb5-1f7cd6e25e4b")
 		(property "Reference" "#PWR0412"
-			(at 101.6 137.16 0)
+			(at 99.06 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3897,7 +3941,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 101.6 135.89 0)
+			(at 99.06 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3905,7 +3949,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 101.6 130.81 0)
+			(at 99.06 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3914,7 +3958,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 101.6 130.81 0)
+			(at 99.06 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3923,7 +3967,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 101.6 130.81 0)
+			(at 99.06 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3970,7 +4014,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_DFN_QFN:VQFN-24-1EP_4x4mm_P0.5mm_EP2.5x2.5mm"
+		(property "Footprint" "MP3-Player_Footprint_Libraries:TAD5242"
 			(at 111.76 76.2 0)
 			(effects
 				(font
@@ -4080,6 +4124,9 @@
 		)
 		(pin "17"
 			(uuid "6097e42c-216c-45ba-ae69-db7787be9f66")
+		)
+		(pin "25"
+			(uuid "49113f0f-99d6-47d3-a31e-951ee0509e60")
 		)
 		(instances
 			(project ""

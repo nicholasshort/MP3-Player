@@ -1992,7 +1992,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 110.49) (xy 72.39 110.49)
+			(xy 76.2 110.49) (xy 92.71 110.49)
 		)
 		(stroke
 			(width 0)
@@ -2122,7 +2122,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 105.41) (xy 72.39 105.41)
+			(xy 76.2 105.41) (xy 92.71 105.41)
 		)
 		(stroke
 			(width 0)
@@ -2219,16 +2219,6 @@
 			(type default)
 		)
 		(uuid "29695b74-7c9f-4960-a4e5-f24a69fe29c1")
-	)
-	(wire
-		(pts
-			(xy 80.01 105.41) (xy 92.71 105.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2f2e6531-3579-4baf-a63c-98856f1efb62")
 	)
 	(wire
 		(pts
@@ -2612,16 +2602,6 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 110.49) (xy 92.71 110.49)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9518b6b8-3d1a-4616-a0ad-fb9b7a6a70de")
-	)
-	(wire
-		(pts
 			(xy 152.4 100.33) (xy 195.58 100.33)
 		)
 		(stroke
@@ -2632,7 +2612,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 107.95) (xy 72.39 107.95)
+			(xy 76.2 107.95) (xy 92.71 107.95)
 		)
 		(stroke
 			(width 0)
@@ -2729,16 +2709,6 @@
 			(type default)
 		)
 		(uuid "a9c1c112-5530-4f19-bb26-e6258836a448")
-	)
-	(wire
-		(pts
-			(xy 80.01 107.95) (xy 92.71 107.95)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ae0b38e6-8241-4c70-9c32-f348aeb0ac02")
 	)
 	(wire
 		(pts
@@ -3080,16 +3050,6 @@
 		)
 		(uuid "fc6ce266-68d4-44d8-8257-88ce3e5b1698")
 	)
-	(label "DAC_BCLK_PIN"
-		(at 82.55 107.95 0)
-		(effects
-			(font
-				(size 0.635 0.635)
-			)
-			(justify left bottom)
-		)
-		(uuid "0d2f1839-d0c7-4dd5-8f91-09918931a2f1")
-	)
 	(label "DAC_PIN_R"
 		(at 131.445 97.79 0)
 		(effects
@@ -3109,26 +3069,6 @@
 			(justify left bottom)
 		)
 		(uuid "241ea52e-a978-4700-910b-7d1c98b635d7")
-	)
-	(label "DAC_DIN_PIN"
-		(at 82.55 105.41 0)
-		(effects
-			(font
-				(size 0.635 0.635)
-			)
-			(justify left bottom)
-		)
-		(uuid "46dfbde4-adf5-4cd9-a6af-1f256b5ac82d")
-	)
-	(label "DAC_FSYNC_PIN"
-		(at 82.55 110.49 0)
-		(effects
-			(font
-				(size 0.635 0.635)
-			)
-			(justify left bottom)
-		)
-		(uuid "60559762-e047-40e4-b24f-de419bfd4f53")
 	)
 	(label "DAC_DREG"
 		(at 73.66 115.57 0)
@@ -3216,7 +3156,7 @@
 	)
 	(global_label "DAC_BCLK"
 		(shape input)
-		(at 64.77 107.95 180)
+		(at 76.2 107.95 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3226,7 +3166,7 @@
 		)
 		(uuid "84f68971-a948-4b53-8636-552d010d4067")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 52.3505 107.95 0)
+			(at 63.7805 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3238,7 +3178,7 @@
 	)
 	(global_label "DAC_DIN"
 		(shape input)
-		(at 64.77 105.41 180)
+		(at 76.2 105.41 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3248,7 +3188,7 @@
 		)
 		(uuid "aab97396-6714-4b4b-a14c-4879b0fceb90")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 53.9833 105.41 0)
+			(at 65.4133 105.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3260,7 +3200,7 @@
 	)
 	(global_label "DAC_FSYNC"
 		(shape input)
-		(at 64.77 110.49 180)
+		(at 76.2 110.49 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3270,7 +3210,7 @@
 		)
 		(uuid "cbaa12ce-823c-49e8-9d54-59904864483b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 51.2014 110.49 0)
+			(at 62.6314 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3308,7 +3248,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 84.1248 125.73 0)
 			(effects
 				(font
@@ -3458,7 +3398,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 72.6948 125.73 0)
 			(effects
 				(font
@@ -3678,7 +3618,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 140.6652 66.04 0)
 			(effects
 				(font
@@ -3879,7 +3819,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 129.2352 66.04 0)
 			(effects
 				(font
@@ -4132,73 +4072,6 @@
 			(project ""
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/55939feb-9632-43ca-a0aa-b7cf8cf1876d"
 					(reference "U401")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 76.2 110.49 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "52ec49b0-f083-4f07-8a4b-d9f2bf5fb39b")
-		(property "Reference" "R405"
-			(at 70.866 109.474 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "0R"
-			(at 76.2 110.49 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 76.2 112.268 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 76.2 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 76.2 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "762c5e21-5cfc-44fe-8630-23f8d8e5a848")
-		)
-		(pin "2"
-			(uuid "c1cccc98-2098-40a1-9678-54187d331380")
-		)
-		(instances
-			(project "MP3-Player"
-				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/55939feb-9632-43ca-a0aa-b7cf8cf1876d"
-					(reference "R405")
 					(unit 1)
 				)
 			)
@@ -4694,7 +4567,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 94.2848 66.04 0)
 			(effects
 				(font
@@ -4868,73 +4741,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 76.2 107.95 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c6e61b16-250d-4e7c-b38a-10a5cfed23ae")
-		(property "Reference" "R404"
-			(at 70.866 106.934 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "0R"
-			(at 76.2 107.95 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 76.2 109.728 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 76.2 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 76.2 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ebbb2a15-3504-4667-9346-e4584d88a803")
-		)
-		(pin "2"
-			(uuid "9a6405d7-3db6-4e2b-8f03-ae4205d98dcb")
-		)
-		(instances
-			(project "MP3-Player"
-				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/55939feb-9632-43ca-a0aa-b7cf8cf1876d"
-					(reference "R404")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 83.82 87.63 0)
 		(mirror y)
@@ -4962,7 +4768,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 82.8548 91.44 0)
 			(effects
 				(font
@@ -5102,7 +4908,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 82.8548 66.04 0)
 			(effects
 				(font
@@ -5272,73 +5078,6 @@
 			(project "MP3-Player"
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/55939feb-9632-43ca-a0aa-b7cf8cf1876d"
 					(reference "#PWR0411")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 76.2 105.41 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "fa80e86a-038d-4a21-b2ca-25825724ab2f")
-		(property "Reference" "R403"
-			(at 70.866 104.394 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "0R"
-			(at 76.2 105.41 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 76.2 107.188 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 76.2 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 76.2 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d2b743d9-95b0-424a-b11b-1df698adb13d")
-		)
-		(pin "2"
-			(uuid "e1ba6050-5155-4309-948c-5b30178894bd")
-		)
-		(instances
-			(project ""
-				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/55939feb-9632-43ca-a0aa-b7cf8cf1876d"
-					(reference "R403")
 					(unit 1)
 				)
 			)

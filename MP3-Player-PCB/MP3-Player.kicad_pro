@@ -517,7 +517,7 @@
       },
       {
         "name": "BAT",
-        "pcb_color": "rgb(255, 251, 7)",
+        "pcb_color": "rgb(100, 255, 179)",
         "priority": 1,
         "schematic_color": "rgba(0, 0, 0, 0.000)"
       },

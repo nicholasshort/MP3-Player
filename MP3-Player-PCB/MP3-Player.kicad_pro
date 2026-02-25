@@ -630,31 +630,31 @@
       },
       {
         "netclass": "USB",
-        "pattern": "(^USB.*|^.*/USB.*)"
+        "pattern": "(^|.*/)USB*"
       },
       {
         "netclass": "LED",
-        "pattern": "(^LED.*|^.*/LED.*)"
+        "pattern": "(^|.*/)LED.*"
       },
       {
         "netclass": "SWD",
-        "pattern": "(^SWD|^.*/SWD.*)"
+        "pattern": "(^|.*/)SWD.*"
       },
       {
         "netclass": "DAC",
-        "pattern": "(^DAC|^.*/DAC.*)"
+        "pattern": "(^|.*/)DAC.*"
       },
       {
         "netclass": "SD_CARD",
-        "pattern": "(^SD_CARD|^.*/SD_CARD.*)"
+        "pattern": "(^|.*/)SD_CARD.*"
       },
       {
         "netclass": "BAT",
-        "pattern": "(^BAT|^.*/BAT.*)"
+        "pattern": "(^|.*/)BAT.*"
       },
       {
         "netclass": "BUTTON",
-        "pattern": "(^BUTTON|^.*/BUTTON.*)"
+        "pattern": "(^|.*/)BUTTON.*"
       }
     ]
   },

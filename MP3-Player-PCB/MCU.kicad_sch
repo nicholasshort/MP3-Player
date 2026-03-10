@@ -4112,28 +4112,6 @@
 			)
 		)
 	)
-	(global_label "BUTTON_3"
-		(shape input)
-		(at 233.68 83.82 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "0d066cb7-050e-4f9f-b4d6-3667654116cb")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 246.039 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "DAC_FSYNC"
 		(shape output)
 		(at 185.42 71.12 0)
@@ -4244,28 +4222,6 @@
 			)
 		)
 	)
-	(global_label "BUTTON_4"
-		(shape input)
-		(at 233.68 86.36 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "2f0b41d2-631c-4e0a-b771-33ad9b2ee2f1")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 246.039 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "SD_CARD_NCD"
 		(shape input)
 		(at 185.42 81.28 0)
@@ -4367,6 +4323,28 @@
 		(uuid "63217874-1c0c-43a5-83a8-2da5620269cf")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 203.9476 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "BUTTON_4"
+		(shape input)
+		(at 233.68 83.82 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "75127f53-a0f9-477a-84c8-2f23c0815258")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 246.039 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4548,6 +4526,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "BUTTON_3"
+		(shape input)
+		(at 233.68 86.36 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c6404278-092b-40e2-a1c3-3e5a9390473a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 246.039 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)

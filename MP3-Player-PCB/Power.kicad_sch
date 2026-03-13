@@ -3427,6 +3427,18 @@
 		)
 		(uuid "73224c92-ae20-4a65-a371-66f67ff65b39")
 	)
+	(text "Make sure to get polarity correct!"
+		(exclude_from_sim no)
+		(at 272.288 56.388 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+				(thickness 0.254)
+				(bold yes)
+			)
+		)
+		(uuid "8a47880c-6407-43b2-945a-8226e77139d2")
+	)
 	(text "Set ILIM via register"
 		(exclude_from_sim no)
 		(at 165.608 74.422 0)

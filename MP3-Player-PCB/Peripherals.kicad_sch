@@ -5538,7 +5538,7 @@
 				)
 			)
 		)
-		(property "Value" "1-1825910-4"
+		(property "Value" "ZX-QC66-10.0TP"
 			(at 270.51 36.83 0)
 			(effects
 				(font
@@ -5546,7 +5546,7 @@
 				)
 			)
 		)
-		(property "Footprint" "MP3-Player_Footprint_Libraries:1-1825910-4"
+		(property "Footprint" "MP3-Player_Footprint_Libraries:ZX-QC66"
 			(at 270.51 36.83 0)
 			(effects
 				(font
@@ -5612,7 +5612,7 @@
 				)
 			)
 		)
-		(property "Value" "1-1825910-4"
+		(property "Value" "ZX-QC66-10.0TP"
 			(at 220.98 55.88 0)
 			(effects
 				(font
@@ -5620,7 +5620,7 @@
 				)
 			)
 		)
-		(property "Footprint" "MP3-Player_Footprint_Libraries:1-1825910-4"
+		(property "Footprint" "MP3-Player_Footprint_Libraries:ZX-QC66"
 			(at 220.98 55.88 0)
 			(effects
 				(font
@@ -5685,7 +5685,7 @@
 				)
 			)
 		)
-		(property "Value" "1-1825910-4"
+		(property "Value" "ZX-QC66-10.0TP"
 			(at 208.534 121.92 90)
 			(effects
 				(font
@@ -5693,7 +5693,7 @@
 				)
 			)
 		)
-		(property "Footprint" "MP3-Player_Footprint_Libraries:1-1825910-4"
+		(property "Footprint" "MP3-Player_Footprint_Libraries:ZX-QC66"
 			(at 223.52 120.65 0)
 			(effects
 				(font
@@ -7969,7 +7969,7 @@
 				)
 			)
 		)
-		(property "Value" "1-1825910-4"
+		(property "Value" "ZX-QC66-10.0TP"
 			(at 220.98 36.83 0)
 			(effects
 				(font
@@ -7977,7 +7977,7 @@
 				)
 			)
 		)
-		(property "Footprint" "MP3-Player_Footprint_Libraries:1-1825910-4"
+		(property "Footprint" "MP3-Player_Footprint_Libraries:ZX-QC66"
 			(at 220.98 36.83 0)
 			(effects
 				(font

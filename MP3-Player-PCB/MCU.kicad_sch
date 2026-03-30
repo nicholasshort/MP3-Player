@@ -2557,6 +2557,10 @@
 		(uuid "a88d4676-fcf4-4611-8dee-a50d04313414")
 	)
 	(no_connect
+		(at 173.99 99.06)
+		(uuid "b4f010e0-018d-4934-8db3-56a5ed9f9aa2")
+	)
+	(no_connect
 		(at 138.43 78.74)
 		(uuid "d51c2b40-5388-4568-9bbe-900c52a93966")
 	)
@@ -3632,16 +3636,6 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 99.06) (xy 173.99 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b78b641e-c51d-4fbd-957c-caa1a914d56a")
-	)
-	(wire
-		(pts
 			(xy 118.11 60.96) (xy 138.43 60.96)
 		)
 		(stroke
@@ -4301,28 +4295,6 @@
 		(uuid "60ae9599-560b-4bb4-9267-9285637548f3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 201.4679 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "AUDIO_JACK_DET"
-		(shape input)
-		(at 185.42 99.06 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "63217874-1c0c-43a5-83a8-2da5620269cf")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 203.9476 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)

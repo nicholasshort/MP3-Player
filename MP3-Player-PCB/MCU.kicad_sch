@@ -4732,6 +4732,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part #" "C1525"
+			(at 105.41 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "09e27b2a-8256-4ea4-b5ec-1e2a3d3ec915")
 		)
@@ -4868,6 +4877,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part #" ""
+			(at 113.03 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "fe75132d-0e68-44fa-9a24-7e05a185474c")
 		)
@@ -4927,6 +4945,15 @@
 			)
 		)
 		(property "Description" "Four pin crystal, GND on pins 2 and 4"
+			(at 55.88 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C518154"
 			(at 55.88 92.71 0)
 			(effects
 				(font
@@ -5020,6 +5047,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part #" ""
+			(at 99.06 114.3 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "6fdb5795-1e43-47ff-8a85-a87091fefb45")
 		)
@@ -5082,6 +5118,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 88.9 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C1525"
 			(at 88.9 95.25 0)
 			(effects
 				(font
@@ -5222,6 +5267,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part #" "C25531"
+			(at 129.54 66.04 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "3c07dd6c-8002-4e80-a4c1-e4e19ffa6bfe")
 		)
@@ -5285,6 +5339,15 @@
 			)
 		)
 		(property "Description" "STMicroelectronics Arm Cortex-M4 MCU, 512KB flash, 128KB RAM, 100 MHz, 1.7-3.6V, 36 GPIO, UFQFPN48"
+			(at 156.21 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C2054095"
 			(at 156.21 96.52 0)
 			(effects
 				(font
@@ -5508,6 +5571,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part #" ""
+			(at 99.06 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "fe75132d-0e68-44fa-9a24-7e05a185474d")
 		)
@@ -5578,6 +5650,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part #" "C1525"
+			(at 222.25 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "efa4f29d-c9d2-4d2d-a439-6af3a0aefc0f")
 		)
@@ -5640,6 +5721,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 139.7 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C1525"
 			(at 139.7 44.45 0)
 			(effects
 				(font
@@ -5719,6 +5809,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part #" ""
+			(at 228.6 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "4"
 			(uuid "4a4f90c0-c238-48d8-8dd6-60d32bebb709")
 		)
@@ -5765,7 +5864,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "10p"
 			(at 69.85 101.5999 0)
 			(effects
 				(font
@@ -5793,6 +5892,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 66.04 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C162202"
 			(at 66.04 100.33 0)
 			(effects
 				(font
@@ -5992,6 +6100,15 @@
 		)
 		(property "Description" "Resistor"
 			(at 124.46 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C15402"
+			(at 124.46 78.74 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6332,6 +6449,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part #" "C1525"
+			(at 209.55 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "e453d2ab-6c3f-4ce6-a416-885c83ce80b3")
 		)
@@ -6394,6 +6520,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 128.27 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C1525"
 			(at 128.27 44.45 0)
 			(effects
 				(font
@@ -6603,6 +6738,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part #" "C1525"
+			(at 209.55 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "df67b340-db9b-47d7-8629-cc03259052b9")
 		)
@@ -6738,6 +6882,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part #" "C1525"
+			(at 93.98 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "09e27b2a-8256-4ea4-b5ec-1e2a3d3ec918")
 		)
@@ -6800,6 +6953,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 127 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C1705"
 			(at 127 134.62 0)
 			(effects
 				(font
@@ -6943,6 +7105,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part #" "C1525"
+			(at 116.84 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "09e27b2a-8256-4ea4-b5ec-1e2a3d3ec919")
 		)
@@ -6976,7 +7147,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "10p"
 			(at 38.608 101.6 0)
 			(effects
 				(font
@@ -7004,6 +7175,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 46.99 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C162202"
 			(at 46.99 100.33 0)
 			(effects
 				(font
@@ -7148,6 +7328,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part #" "C1705"
+			(at 82.55 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "09e27b2a-8256-4ea4-b5ec-1e2a3d3ec91a")
 		)
@@ -7209,6 +7398,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 118.11 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C1525"
 			(at 118.11 67.31 0)
 			(effects
 				(font
@@ -7483,6 +7681,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB Part #" "C1525"
+			(at 222.25 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "a1bf845b-13cc-4f9b-a40c-06e62dc76f95")
 		)
@@ -7555,6 +7762,15 @@
 		)
 		(property "Sim.Pins" "1=K 2=A"
 			(at 113.03 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" ""
+			(at 113.03 114.3 90)
 			(effects
 				(font
 					(size 1.27 1.27)

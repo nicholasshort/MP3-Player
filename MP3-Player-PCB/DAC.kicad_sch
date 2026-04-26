@@ -329,130 +329,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Device:R"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "R"
-				(at 2.032 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "R"
-				(at 0 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at -1.778 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Resistor"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "R res resistor"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "R_*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "R_0_1"
-				(rectangle
-					(start -1.016 -2.54)
-					(end 1.016 2.54)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "R_1_1"
-				(pin passive line
-					(at 0 3.81 270)
-					(length 1.27)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -3.81 90)
-					(length 1.27)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "MP3-Player_Symbol_Libraries:TAD5242"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1720,12 +1596,6 @@
 		)
 	)
 	(junction
-		(at 207.01 90.17)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "09574969-78aa-4ef3-98f8-d59ecf471756")
-	)
-	(junction
 		(at 90.17 99.06)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1756,12 +1626,6 @@
 		(uuid "28d450c5-6990-479e-a746-73698b3b1541")
 	)
 	(junction
-		(at 190.5 92.71)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "2eb572bb-2917-4425-b112-6ace3a0c594b")
-	)
-	(junction
 		(at 85.09 115.57)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1790,6 +1654,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6f7aa2d4-5790-4135-ac7f-d907a4c2c7d5")
+	)
+	(junction
+		(at 190.5 92.71)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "799d34d6-c5b5-4379-872b-9f15da35be1b")
 	)
 	(junction
 		(at 95.25 55.88)
@@ -1897,6 +1767,16 @@
 	)
 	(wire
 		(pts
+			(xy 130.81 92.71) (xy 190.5 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0357fcac-a21b-4667-b10e-715727a4a6e1")
+	)
+	(wire
+		(pts
 			(xy 77.47 96.52) (xy 91.44 96.52)
 		)
 		(stroke
@@ -1917,7 +1797,7 @@
 	)
 	(wire
 		(pts
-			(xy 207.01 90.17) (xy 212.09 90.17)
+			(xy 203.2 90.17) (xy 212.09 90.17)
 		)
 		(stroke
 			(width 0)
@@ -1987,16 +1867,6 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 90.17) (xy 207.01 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1a1d4d49-b023-438d-a744-38881023e8a8")
-	)
-	(wire
-		(pts
 			(xy 95.25 55.88) (xy 95.25 58.42)
 		)
 		(stroke
@@ -2047,7 +1917,7 @@
 	)
 	(wire
 		(pts
-			(xy 130.81 97.79) (xy 135.89 97.79)
+			(xy 130.81 97.79) (xy 195.58 97.79)
 		)
 		(stroke
 			(width 0)
@@ -2127,16 +1997,6 @@
 	)
 	(wire
 		(pts
-			(xy 130.81 92.71) (xy 135.89 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "36e7228e-cf79-468f-88a1-7d2b2b14f9b9")
-	)
-	(wire
-		(pts
 			(xy 90.17 101.6) (xy 90.17 99.06)
 		)
 		(stroke
@@ -2157,7 +2017,17 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 97.79) (xy 209.55 97.79)
+			(xy 190.5 92.71) (xy 205.74 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3906c45a-f665-4b5f-becc-a792d92bc84b")
+	)
+	(wire
+		(pts
+			(xy 195.58 97.79) (xy 208.28 97.79)
 		)
 		(stroke
 			(width 0)
@@ -2187,6 +2057,16 @@
 	)
 	(wire
 		(pts
+			(xy 208.28 92.71) (xy 212.09 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c3b82d7-48f5-475a-95f1-1c4d1908025b")
+	)
+	(wire
+		(pts
 			(xy 92.71 96.52) (xy 91.44 96.52)
 		)
 		(stroke
@@ -2204,26 +2084,6 @@
 			(type default)
 		)
 		(uuid "44afa17a-2fa6-4516-b74b-d0c0c46914d3")
-	)
-	(wire
-		(pts
-			(xy 130.81 95.25) (xy 133.35 95.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "454657f3-a101-4a48-a8ac-964239365a73")
-	)
-	(wire
-		(pts
-			(xy 209.55 95.25) (xy 212.09 95.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "48344e15-caf5-41a3-89b9-90e27b9af0a8")
 	)
 	(wire
 		(pts
@@ -2254,16 +2114,6 @@
 			(type default)
 		)
 		(uuid "52bebb6f-0a92-43a8-b5b3-7c31526c52bf")
-	)
-	(wire
-		(pts
-			(xy 201.93 87.63) (xy 205.74 87.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "53d4c52d-0f55-4962-ac48-e569f1a6a7a3")
 	)
 	(wire
 		(pts
@@ -2327,6 +2177,16 @@
 	)
 	(wire
 		(pts
+			(xy 205.74 92.71) (xy 205.74 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "760b2fbe-5247-49a3-9f6a-9d7482155e50")
+	)
+	(wire
+		(pts
 			(xy 109.22 55.88) (xy 109.22 73.66)
 		)
 		(stroke
@@ -2377,7 +2237,17 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 95.25) (xy 207.01 95.25)
+			(xy 208.28 92.71) (xy 208.28 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "815976b2-9356-4f04-8091-6e5285deacfd")
+	)
+	(wire
+		(pts
+			(xy 193.04 95.25) (xy 203.2 95.25)
 		)
 		(stroke
 			(width 0)
@@ -2417,16 +2287,6 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 87.63) (xy 205.74 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "892a5665-b7b6-4f7c-a236-6b759999af29")
-	)
-	(wire
-		(pts
 			(xy 90.17 88.9) (xy 90.17 91.44)
 		)
 		(stroke
@@ -2457,16 +2317,6 @@
 	)
 	(wire
 		(pts
-			(xy 143.51 97.79) (xy 195.58 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "97cf857a-7c1a-43b2-8dda-b8b118d6ff15")
-	)
-	(wire
-		(pts
 			(xy 83.82 55.88) (xy 83.82 58.42)
 		)
 		(stroke
@@ -2474,16 +2324,6 @@
 			(type default)
 		)
 		(uuid "98d443e2-bd75-47ce-8a34-4b0f8149299f")
-	)
-	(wire
-		(pts
-			(xy 143.51 92.71) (xy 190.5 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9eacdfec-c1cd-47b9-a37c-fde7e5330f15")
 	)
 	(wire
 		(pts
@@ -2577,7 +2417,7 @@
 	)
 	(wire
 		(pts
-			(xy 207.01 90.17) (xy 207.01 95.25)
+			(xy 203.2 90.17) (xy 203.2 95.25)
 		)
 		(stroke
 			(width 0)
@@ -2617,16 +2457,6 @@
 	)
 	(wire
 		(pts
-			(xy 190.5 92.71) (xy 212.09 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "be5421d8-b768-48be-8eca-9cea12c7943f")
-	)
-	(wire
-		(pts
 			(xy 91.44 99.06) (xy 91.44 96.52)
 		)
 		(stroke
@@ -2634,6 +2464,16 @@
 			(type default)
 		)
 		(uuid "bf074ba1-c371-4fa6-9eb9-86951ada22e1")
+	)
+	(wire
+		(pts
+			(xy 130.81 95.25) (xy 133.35 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c4f7525e-0415-4284-8865-f43ea2f94e25")
 	)
 	(wire
 		(pts
@@ -2654,16 +2494,6 @@
 			(type default)
 		)
 		(uuid "ce60772f-bf91-4d6b-9c7f-b1d088a2505d")
-	)
-	(wire
-		(pts
-			(xy 201.93 87.63) (xy 201.93 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d262fb60-c351-4e4d-a9ce-28a0301f738f")
 	)
 	(wire
 		(pts
@@ -2827,6 +2657,16 @@
 	)
 	(wire
 		(pts
+			(xy 205.74 95.25) (xy 212.09 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f4feefb4-c648-47d5-bf34-395c21815ff7")
+	)
+	(wire
+		(pts
 			(xy 85.09 115.57) (xy 85.09 118.11)
 		)
 		(stroke
@@ -2855,18 +2695,8 @@
 		)
 		(uuid "fc6ce266-68d4-44d8-8257-88ce3e5b1698")
 	)
-	(wire
-		(pts
-			(xy 209.55 97.79) (xy 209.55 95.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ffb548cd-7f16-41cf-8c59-4b7a5c841228")
-	)
 	(label "DAC_PIN_R"
-		(at 131.445 97.79 0)
+		(at 130.81 97.79 0)
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -2885,6 +2715,16 @@
 		)
 		(uuid "241ea52e-a978-4700-910b-7d1c98b635d7")
 	)
+	(label "DAC_COMMON_MODE_SENSE"
+		(at 130.81 95.25 0)
+		(effects
+			(font
+				(size 0.635 0.635)
+			)
+			(justify left bottom)
+		)
+		(uuid "55f2c262-b623-4c7e-be99-0a08d672b61c")
+	)
 	(label "DAC_DREG"
 		(at 73.66 115.57 0)
 		(effects
@@ -2896,7 +2736,7 @@
 		(uuid "7236722c-b0b5-472d-be93-8b6dd4909857")
 	)
 	(label "DAC_PIN_L"
-		(at 131.445 92.71 0)
+		(at 130.81 92.71 0)
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -3924,82 +3764,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 139.7 92.71 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "63f7cc8c-161c-4ba5-b6b4-528088a39647")
-		(property "Reference" "R401"
-			(at 139.7 89.916 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "0R"
-			(at 139.7 92.71 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 139.7 94.488 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 139.7 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 139.7 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "JLCPCB Part #" "C17168"
-			(at 139.7 92.71 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0d9b7e2d-a3fc-4dcb-a4c8-971e11ca5639")
-		)
-		(pin "2"
-			(uuid "084abcf4-1983-4518-80d1-62f60beeb5a9")
-		)
-		(instances
-			(project "MP3-Player"
-				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/55939feb-9632-43ca-a0aa-b7cf8cf1876d"
-					(reference "R401")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:VBUS")
 		(at 114.3 54.61 0)
 		(unit 1)
@@ -4059,82 +3823,6 @@
 			(project "MP3-Player"
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/55939feb-9632-43ca-a0aa-b7cf8cf1876d"
 					(reference "#PWR0402")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 139.7 97.79 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "7c1022e3-5284-48a4-80e4-a5f6ef6d6274")
-		(property "Reference" "R402"
-			(at 139.7 100.33 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "0R"
-			(at 139.7 97.79 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 139.7 99.568 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 139.7 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 139.7 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "JLCPCB Part #" "C17168"
-			(at 139.7 97.79 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "bddfec07-4fb4-4365-984c-57f9d5db10d5")
-		)
-		(pin "2"
-			(uuid "c248ea35-5ee7-4cf7-a1af-ce019a3a3d1d")
-		)
-		(instances
-			(project "MP3-Player"
-				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/55939feb-9632-43ca-a0aa-b7cf8cf1876d"
-					(reference "R402")
 					(unit 1)
 				)
 			)
@@ -4766,71 +4454,6 @@
 			(project "MP3-Player"
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/55939feb-9632-43ca-a0aa-b7cf8cf1876d"
 					(reference "#PWR0411")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 201.93 88.9 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "faacfcf0-19a7-4d18-a76f-a80046b16785")
-		(property "Reference" "#PWR0405"
-			(at 201.93 95.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 197.866 90.424 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 201.93 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 201.93 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 201.93 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0fcd87f9-a3e1-4ccd-9979-c7319c5096a1")
-		)
-		(instances
-			(project "MP3-Player"
-				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/55939feb-9632-43ca-a0aa-b7cf8cf1876d"
-					(reference "#PWR0405")
 					(unit 1)
 				)
 			)

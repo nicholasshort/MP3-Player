@@ -6485,6 +6485,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:VBUS")
+		(at 234.95 83.82 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1240e157-9448-4af4-9757-cdd889187a7d")
+		(property "Reference" "#PWR01"
+			(at 234.95 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+VBAT"
+			(at 234.95 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 234.95 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 234.95 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VBUS\""
+			(at 234.95 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e0baac7a-bb8e-4a58-939d-ba2815ca31f5")
+		)
+		(instances
+			(project "MP3-Player"
+				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/156723cf-95cb-4e74-b8dc-320a10f9d20f"
+					(reference "#PWR01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 104.14 48.26 0)
 		(unit 1)
@@ -7244,7 +7309,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C189893"
+		(property "JLCPCB Part #" "C505099"
 			(at 248.92 49.53 0)
 			(effects
 				(font
@@ -8623,72 +8688,6 @@
 			(project ""
 				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/156723cf-95cb-4e74-b8dc-320a10f9d20f"
 					(reference "#PWR0206")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:VBUS")
-		(at 234.95 83.82 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7b15c297-ccb5-4514-85db-4da3e6ebc3d4")
-		(property "Reference" "#PWR0221"
-			(at 234.95 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+VSYS"
-			(at 234.95 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 234.95 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 234.95 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"VBUS\""
-			(at 234.95 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0c2851f1-c6a6-46fb-9517-bf1ec4bccd64")
-		)
-		(instances
-			(project "MP3-Player"
-				(path "/3f51ea9b-d2e1-4711-a47c-269e1b97e0f4/156723cf-95cb-4e74-b8dc-320a10f9d20f"
-					(reference "#PWR0221")
 					(unit 1)
 				)
 			)

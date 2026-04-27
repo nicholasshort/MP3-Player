@@ -3417,28 +3417,6 @@
 		)
 		(uuid "6ef6c09b-5373-4227-a6d5-b311b95ebc12")
 	)
-	(text "Make sure to pick NTC and dependent resistor!\n"
-		(exclude_from_sim no)
-		(at 194.056 84.836 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "73224c92-ae20-4a65-a371-66f67ff65b39")
-	)
-	(text "Make sure to get polarity correct!"
-		(exclude_from_sim no)
-		(at 281.178 56.388 0)
-		(effects
-			(font
-				(size 2.54 2.54)
-				(thickness 0.254)
-				(bold yes)
-			)
-		)
-		(uuid "8a47880c-6407-43b2-945a-8226e77139d2")
-	)
 	(text "Set ILIM via register"
 		(exclude_from_sim no)
 		(at 165.608 74.422 0)
@@ -9413,7 +9391,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "31.6k"
 			(at 209.55 71.1199 0)
 			(effects
 				(font
@@ -9449,7 +9427,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C25744"
+		(property "JLCPCB Part #" "C11463"
 			(at 207.01 69.85 0)
 			(effects
 				(font
@@ -9779,7 +9757,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5.25k"
+		(property "Value" "5.23k"
 			(at 203.2 60.9599 0)
 			(effects
 				(font
@@ -9815,7 +9793,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" ""
+		(property "JLCPCB Part #" "C25907"
 			(at 200.66 59.69 0)
 			(effects
 				(font
@@ -11232,7 +11210,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "317R"
+		(property "Value" "316R"
 			(at 180.34 71.1199 0)
 			(effects
 				(font
@@ -11268,7 +11246,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" ""
+		(property "JLCPCB Part #" "C247119"
 			(at 177.8 69.85 0)
 			(effects
 				(font

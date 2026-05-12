@@ -1,6 +1,6 @@
 # MP3 Player
 
-A compact, portable USB-C rechargeable MP3 player built around an STM32F411 microcontroller, a TI TAD5242 audio DAC, and a microSD card for storage. Designed in KiCad as a personal portfolio project.
+This MP3 Player is very simple. All I want is this: something I can bring with me on runs, hikes, or even long trips that won't run out of battery after a few hours of use. With wired headphones, this device can provide 24+ hours of music on a single charge (at least that's the goal!). 
 
 | Top | Bottom |
 | :---: | :---: |
@@ -9,7 +9,7 @@ A compact, portable USB-C rechargeable MP3 player built around an STM32F411 micr
 ## Status
 
 - **Hardware:** Rev A manufactured and assembled by JLCPCB.
-- **Firmware:** In progress — STM32CubeMX peripheral configuration is committed; board bring-up and application code are ongoing.
+- **Firmware:** In progress!
 
 ## Features
 
@@ -19,10 +19,9 @@ A compact, portable USB-C rechargeable MP3 player built around an STM32F411 micr
 - **Power:**
   - USB-C input (USB 2.0, with USBLC6 ESD protection)
   - TI BQ24259 Li-ion battery charger
-  - Molex PicoBlade connector for a single-cell Li-ion battery, with NTC thermistor sense
-  - Dual TPS7A20 LDOs for clean analogue/digital rails
-- **User interface:** 4 tactile switches (PWR, MENU, PLAY, NEXT) plus two WS2812B-2020 addressable RGB LEDs and discrete green/blue status LEDs
-- **PCB:** 4-layer, ~45 × 45 mm
+  - Dual TPS7A20 LDOs for clean analog/digital rails
+- **User interface:** 4 tactile switches (PWR, MENU, PLAY, NEXT) plus two WS2812B-2020 addressable RGB LEDs
+- **PCB:** 4-layer, 50 × 50 mm
 
 ## Repository layout
 
@@ -67,7 +66,7 @@ The firmware project is a STM32CubeIDE / CubeMX project. The `.ioc` configures t
 - **TIM2 + DMA1** — WS2812B drive
 - **ADC1** — battery / thermistor sense
 
-To regenerate the source tree, open `MP3-Player-Firmware/MP3-Player-Firmware.ioc` in STM32CubeMX or STM32CubeIDE and generate code.
+The main firmware is yet to be written, but lots to come.
 
 ## Licence
 

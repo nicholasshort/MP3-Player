@@ -1,0 +1,543 @@
+ARM GAS  /tmp/ccnytQ4w.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"audio_test.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/audio_test.c"
+  20              		.section	.text.audio_buffer_put_frame,"ax",%progbits
+  21              		.align	1
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	audio_buffer_put_frame:
+  27              	.LVL0:
+  28              	.LFB221:
+   1:Core/Src/audio_test.c **** #include "audio_test.h"
+   2:Core/Src/audio_test.c **** 
+   3:Core/Src/audio_test.c **** #include "i2s.h"
+   4:Core/Src/audio_test.c **** #include <math.h>
+   5:Core/Src/audio_test.c **** #include <stdint.h>
+   6:Core/Src/audio_test.c **** 
+   7:Core/Src/audio_test.c **** #define AUDIO_SAMPLE_RATE_HZ     48000u
+   8:Core/Src/audio_test.c **** #define SINE_FREQ_HZ             100u
+   9:Core/Src/audio_test.c **** #define SINE_TABLE_SIZE          (AUDIO_SAMPLE_RATE_HZ / SINE_FREQ_HZ)
+  10:Core/Src/audio_test.c **** 
+  11:Core/Src/audio_test.c **** /*
+  12:Core/Src/audio_test.c ****  * 480 frames = 10 complete periods of a 1 kHz sine at 48 kHz.
+  13:Core/Src/audio_test.c ****  * This avoids a discontinuity when circular DMA wraps.
+  14:Core/Src/audio_test.c ****  */
+  15:Core/Src/audio_test.c **** #define AUDIO_BUFFER_FRAMES      480u
+  16:Core/Src/audio_test.c **** #define AUDIO_CHANNELS           2u
+  17:Core/Src/audio_test.c **** #define HALFWORDS_PER_SAMPLE     2u
+  18:Core/Src/audio_test.c **** 
+  19:Core/Src/audio_test.c **** /*
+  20:Core/Src/audio_test.c ****  * For 32-bit stereo I2S, each audio frame is:
+  21:Core/Src/audio_test.c ****  *
+  22:Core/Src/audio_test.c ****  * Left  channel: 32 bits = 2 x uint16_t DMA writes
+  23:Core/Src/audio_test.c ****  * Right channel: 32 bits = 2 x uint16_t DMA writes
+  24:Core/Src/audio_test.c ****  *
+  25:Core/Src/audio_test.c ****  * Buffer layout:
+  26:Core/Src/audio_test.c ****  *
+  27:Core/Src/audio_test.c ****  * audio_buffer[0] = left high halfword
+  28:Core/Src/audio_test.c ****  * audio_buffer[1] = left low  halfword
+  29:Core/Src/audio_test.c ****  * audio_buffer[2] = right high halfword
+  30:Core/Src/audio_test.c ****  * audio_buffer[3] = right low  halfword
+ARM GAS  /tmp/ccnytQ4w.s 			page 2
+
+
+  31:Core/Src/audio_test.c ****  * audio_buffer[4] = next left high halfword
+  32:Core/Src/audio_test.c ****  * ...
+  33:Core/Src/audio_test.c ****  */
+  34:Core/Src/audio_test.c **** static uint16_t audio_buffer[AUDIO_BUFFER_FRAMES * AUDIO_CHANNELS * HALFWORDS_PER_SAMPLE];
+  35:Core/Src/audio_test.c **** 
+  36:Core/Src/audio_test.c **** static int32_t sine_table[SINE_TABLE_SIZE];
+  37:Core/Src/audio_test.c **** 
+  38:Core/Src/audio_test.c **** static void sine_table_init(void)
+  39:Core/Src/audio_test.c **** {
+  40:Core/Src/audio_test.c ****     /*
+  41:Core/Src/audio_test.c ****      * Start quiet. Increase later once the waveform looks correct.
+  42:Core/Src/audio_test.c ****      */
+  43:Core/Src/audio_test.c ****     const float amplitude = 0.1f * 2147483647.0f;
+  44:Core/Src/audio_test.c **** 
+  45:Core/Src/audio_test.c ****     for (uint32_t i = 0; i < SINE_TABLE_SIZE; i++)
+  46:Core/Src/audio_test.c ****     {
+  47:Core/Src/audio_test.c ****         float phase = 2.0f * 3.14159265359f * (float)i / (float)SINE_TABLE_SIZE;
+  48:Core/Src/audio_test.c ****         sine_table[i] = (int32_t)(amplitude * sinf(phase));
+  49:Core/Src/audio_test.c ****     }
+  50:Core/Src/audio_test.c **** }
+  51:Core/Src/audio_test.c **** 
+  52:Core/Src/audio_test.c **** static void audio_buffer_put_frame(uint32_t frame, int32_t left, int32_t right)
+  53:Core/Src/audio_test.c **** {
+  29              		.loc 1 53 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  54:Core/Src/audio_test.c ****     uint32_t i = frame * 4u;
+  34              		.loc 1 54 5 view .LVU1
+  35              		.loc 1 54 14 is_stmt 0 view .LVU2
+  36 0000 8000     		lsls	r0, r0, #2
+  37              	.LVL1:
+  55:Core/Src/audio_test.c **** 
+  56:Core/Src/audio_test.c ****     /*
+  57:Core/Src/audio_test.c ****      * Pack high halfword first.
+  58:Core/Src/audio_test.c ****      *
+  59:Core/Src/audio_test.c ****      * Do NOT store as uint32_t and cast to uint16_t*, because little-endian
+  60:Core/Src/audio_test.c ****      * memory order sends the low halfword first, which is wrong for this I2S use.
+  61:Core/Src/audio_test.c ****      */
+  62:Core/Src/audio_test.c **** 
+  63:Core/Src/audio_test.c ****     audio_buffer[i + 0u] = (uint16_t)(((uint32_t)left  >> 16) & 0xFFFFu);
+  38              		.loc 1 63 5 is_stmt 1 view .LVU3
+  39              		.loc 1 63 28 is_stmt 0 view .LVU4
+  40 0002 4FEA114C 		lsr	ip, r1, #16
+  41              		.loc 1 63 26 view .LVU5
+  42 0006 084B     		ldr	r3, .L2
+  43 0008 23F810C0 		strh	ip, [r3, r0, lsl #1]	@ movhi
+  64:Core/Src/audio_test.c ****     audio_buffer[i + 1u] = (uint16_t)(((uint32_t)left  >>  0) & 0xFFFFu);
+  44              		.loc 1 64 5 is_stmt 1 view .LVU6
+  45              		.loc 1 64 20 is_stmt 0 view .LVU7
+  46 000c 00F1010C 		add	ip, r0, #1
+  47              		.loc 1 64 26 view .LVU8
+  48 0010 23F81C10 		strh	r1, [r3, ip, lsl #1]	@ movhi
+  65:Core/Src/audio_test.c **** 
+  66:Core/Src/audio_test.c ****     audio_buffer[i + 2u] = (uint16_t)(((uint32_t)right >> 16) & 0xFFFFu);
+  49              		.loc 1 66 5 is_stmt 1 view .LVU9
+ARM GAS  /tmp/ccnytQ4w.s 			page 3
+
+
+  50              		.loc 1 66 20 is_stmt 0 view .LVU10
+  51 0014 811C     		adds	r1, r0, #2
+  52              	.LVL2:
+  53              		.loc 1 66 28 view .LVU11
+  54 0016 4FEA124C 		lsr	ip, r2, #16
+  55              		.loc 1 66 26 view .LVU12
+  56 001a 23F811C0 		strh	ip, [r3, r1, lsl #1]	@ movhi
+  67:Core/Src/audio_test.c ****     audio_buffer[i + 3u] = (uint16_t)(((uint32_t)right >>  0) & 0xFFFFu);
+  57              		.loc 1 67 5 is_stmt 1 view .LVU13
+  58              		.loc 1 67 20 is_stmt 0 view .LVU14
+  59 001e 0330     		adds	r0, r0, #3
+  60              	.LVL3:
+  61              		.loc 1 67 26 view .LVU15
+  62 0020 23F81020 		strh	r2, [r3, r0, lsl #1]	@ movhi
+  68:Core/Src/audio_test.c **** }
+  63              		.loc 1 68 1 view .LVU16
+  64 0024 7047     		bx	lr
+  65              	.L3:
+  66 0026 00BF     		.align	2
+  67              	.L2:
+  68 0028 00000000 		.word	audio_buffer
+  69              		.cfi_endproc
+  70              	.LFE221:
+  72              		.section	.text.fill_audio_buffer,"ax",%progbits
+  73              		.align	1
+  74              		.syntax unified
+  75              		.thumb
+  76              		.thumb_func
+  78              	fill_audio_buffer:
+  79              	.LFB222:
+  69:Core/Src/audio_test.c **** 
+  70:Core/Src/audio_test.c **** static void fill_audio_buffer(void)
+  71:Core/Src/audio_test.c **** {
+  80              		.loc 1 71 1 is_stmt 1 view -0
+  81              		.cfi_startproc
+  82              		@ args = 0, pretend = 0, frame = 0
+  83              		@ frame_needed = 0, uses_anonymous_args = 0
+  84 0000 38B5     		push	{r3, r4, r5, lr}
+  85              	.LCFI0:
+  86              		.cfi_def_cfa_offset 16
+  87              		.cfi_offset 3, -16
+  88              		.cfi_offset 4, -12
+  89              		.cfi_offset 5, -8
+  90              		.cfi_offset 14, -4
+  72:Core/Src/audio_test.c ****     uint32_t phase = 0;
+  91              		.loc 1 72 5 view .LVU18
+  92              	.LVL4:
+  73:Core/Src/audio_test.c **** 
+  74:Core/Src/audio_test.c ****     for (uint32_t frame = 0; frame < AUDIO_BUFFER_FRAMES; frame++)
+  93              		.loc 1 74 5 view .LVU19
+  94              	.LBB2:
+  95              		.loc 1 74 10 view .LVU20
+  96              		.loc 1 74 19 is_stmt 0 view .LVU21
+  97 0002 0025     		movs	r5, #0
+  98              	.LBE2:
+  72:Core/Src/audio_test.c ****     uint32_t phase = 0;
+  99              		.loc 1 72 14 view .LVU22
+ARM GAS  /tmp/ccnytQ4w.s 			page 4
+
+
+ 100 0004 2C46     		mov	r4, r5
+ 101              	.LBB5:
+ 102              		.loc 1 74 5 view .LVU23
+ 103 0006 04E0     		b	.L5
+ 104              	.LVL5:
+ 105              	.L6:
+ 106              	.LBB3:
+  75:Core/Src/audio_test.c ****     {
+  76:Core/Src/audio_test.c ****         int32_t sample = sine_table[phase];
+  77:Core/Src/audio_test.c **** 
+  78:Core/Src/audio_test.c ****         phase++;
+  79:Core/Src/audio_test.c ****         if (phase >= SINE_TABLE_SIZE)
+  80:Core/Src/audio_test.c ****         {
+  81:Core/Src/audio_test.c ****             phase = 0;
+  82:Core/Src/audio_test.c ****         }
+  83:Core/Src/audio_test.c **** 
+  84:Core/Src/audio_test.c ****         audio_buffer_put_frame(frame, sample, sample);
+ 107              		.loc 1 84 9 is_stmt 1 view .LVU24
+ 108 0008 0A46     		mov	r2, r1
+ 109 000a 2846     		mov	r0, r5
+ 110 000c FFF7FEFF 		bl	audio_buffer_put_frame
+ 111              	.LVL6:
+ 112              		.loc 1 84 9 is_stmt 0 view .LVU25
+ 113              	.LBE3:
+  74:Core/Src/audio_test.c ****     {
+ 114              		.loc 1 74 64 is_stmt 1 discriminator 2 view .LVU26
+ 115 0010 0135     		adds	r5, r5, #1
+ 116              	.LVL7:
+ 117              	.L5:
+  74:Core/Src/audio_test.c ****     {
+ 118              		.loc 1 74 36 discriminator 1 view .LVU27
+ 119 0012 B5F5F07F 		cmp	r5, #480
+ 120 0016 08D2     		bcs	.L10
+ 121              	.LBB4:
+  76:Core/Src/audio_test.c **** 
+ 122              		.loc 1 76 9 view .LVU28
+  76:Core/Src/audio_test.c **** 
+ 123              		.loc 1 76 17 is_stmt 0 view .LVU29
+ 124 0018 044B     		ldr	r3, .L11
+ 125 001a 53F82410 		ldr	r1, [r3, r4, lsl #2]
+ 126              	.LVL8:
+  78:Core/Src/audio_test.c ****         if (phase >= SINE_TABLE_SIZE)
+ 127              		.loc 1 78 9 is_stmt 1 view .LVU30
+  78:Core/Src/audio_test.c ****         if (phase >= SINE_TABLE_SIZE)
+ 128              		.loc 1 78 14 is_stmt 0 view .LVU31
+ 129 001e 0134     		adds	r4, r4, #1
+ 130              	.LVL9:
+  79:Core/Src/audio_test.c ****         {
+ 131              		.loc 1 79 9 is_stmt 1 view .LVU32
+  79:Core/Src/audio_test.c ****         {
+ 132              		.loc 1 79 12 is_stmt 0 view .LVU33
+ 133 0020 B4F5F07F 		cmp	r4, #480
+ 134 0024 F0D3     		bcc	.L6
+  81:Core/Src/audio_test.c ****         }
+ 135              		.loc 1 81 19 view .LVU34
+ 136 0026 0024     		movs	r4, #0
+ 137              	.LVL10:
+ARM GAS  /tmp/ccnytQ4w.s 			page 5
+
+
+  81:Core/Src/audio_test.c ****         }
+ 138              		.loc 1 81 19 view .LVU35
+ 139 0028 EEE7     		b	.L6
+ 140              	.LVL11:
+ 141              	.L10:
+  81:Core/Src/audio_test.c ****         }
+ 142              		.loc 1 81 19 view .LVU36
+ 143              	.LBE4:
+ 144              	.LBE5:
+  85:Core/Src/audio_test.c ****     }
+  86:Core/Src/audio_test.c **** }
+ 145              		.loc 1 86 1 view .LVU37
+ 146 002a 38BD     		pop	{r3, r4, r5, pc}
+ 147              	.LVL12:
+ 148              	.L12:
+ 149              		.loc 1 86 1 view .LVU38
+ 150              		.align	2
+ 151              	.L11:
+ 152 002c 00000000 		.word	sine_table
+ 153              		.cfi_endproc
+ 154              	.LFE222:
+ 156              		.section	.text.sine_table_init,"ax",%progbits
+ 157              		.align	1
+ 158              		.syntax unified
+ 159              		.thumb
+ 160              		.thumb_func
+ 162              	sine_table_init:
+ 163              	.LFB220:
+  39:Core/Src/audio_test.c ****     /*
+ 164              		.loc 1 39 1 is_stmt 1 view -0
+ 165              		.cfi_startproc
+ 166              		@ args = 0, pretend = 0, frame = 0
+ 167              		@ frame_needed = 0, uses_anonymous_args = 0
+ 168 0000 10B5     		push	{r4, lr}
+ 169              	.LCFI1:
+ 170              		.cfi_def_cfa_offset 8
+ 171              		.cfi_offset 4, -8
+ 172              		.cfi_offset 14, -4
+  43:Core/Src/audio_test.c **** 
+ 173              		.loc 1 43 5 view .LVU40
+ 174              	.LVL13:
+  45:Core/Src/audio_test.c ****     {
+ 175              		.loc 1 45 5 view .LVU41
+ 176              	.LBB6:
+  45:Core/Src/audio_test.c ****     {
+ 177              		.loc 1 45 10 view .LVU42
+  45:Core/Src/audio_test.c ****     {
+ 178              		.loc 1 45 19 is_stmt 0 view .LVU43
+ 179 0002 0024     		movs	r4, #0
+  45:Core/Src/audio_test.c ****     {
+ 180              		.loc 1 45 5 view .LVU44
+ 181 0004 19E0     		b	.L14
+ 182              	.LVL14:
+ 183              	.L15:
+ 184              	.LBB7:
+  47:Core/Src/audio_test.c ****         sine_table[i] = (int32_t)(amplitude * sinf(phase));
+ 185              		.loc 1 47 9 is_stmt 1 view .LVU45
+ARM GAS  /tmp/ccnytQ4w.s 			page 6
+
+
+  47:Core/Src/audio_test.c ****         sine_table[i] = (int32_t)(amplitude * sinf(phase));
+ 186              		.loc 1 47 47 is_stmt 0 view .LVU46
+ 187 0006 07EE904A 		vmov	s15, r4	@ int
+ 188 000a F8EE677A 		vcvt.f32.u32	s15, s15
+  47:Core/Src/audio_test.c ****         sine_table[i] = (int32_t)(amplitude * sinf(phase));
+ 189              		.loc 1 47 45 view .LVU47
+ 190 000e 9FED0D7A 		vldr.32	s14, .L17
+ 191 0012 67EE877A 		vmul.f32	s15, s15, s14
+ 192              	.LVL15:
+  48:Core/Src/audio_test.c ****     }
+ 193              		.loc 1 48 9 is_stmt 1 view .LVU48
+  48:Core/Src/audio_test.c ****     }
+ 194              		.loc 1 48 47 is_stmt 0 view .LVU49
+ 195 0016 9FED0C0A 		vldr.32	s0, .L17+4
+ 196 001a 87EE800A 		vdiv.f32	s0, s15, s0
+ 197              	.LVL16:
+  48:Core/Src/audio_test.c ****     }
+ 198              		.loc 1 48 47 view .LVU50
+ 199 001e FFF7FEFF 		bl	sinf
+ 200              	.LVL17:
+  48:Core/Src/audio_test.c ****     }
+ 201              		.loc 1 48 45 discriminator 1 view .LVU51
+ 202 0022 DFED0A7A 		vldr.32	s15, .L17+8
+ 203 0026 20EE270A 		vmul.f32	s0, s0, s15
+  48:Core/Src/audio_test.c ****     }
+ 204              		.loc 1 48 25 discriminator 1 view .LVU52
+ 205 002a BDEEC00A 		vcvt.s32.f32	s0, s0
+  48:Core/Src/audio_test.c ****     }
+ 206              		.loc 1 48 23 discriminator 1 view .LVU53
+ 207 002e 084B     		ldr	r3, .L17+12
+ 208 0030 10EE102A 		vmov	r2, s0	@ int
+ 209 0034 43F82420 		str	r2, [r3, r4, lsl #2]
+ 210              	.LBE7:
+  45:Core/Src/audio_test.c ****     {
+ 211              		.loc 1 45 48 is_stmt 1 discriminator 3 view .LVU54
+ 212 0038 0134     		adds	r4, r4, #1
+ 213              	.LVL18:
+ 214              	.L14:
+  45:Core/Src/audio_test.c ****     {
+ 215              		.loc 1 45 28 discriminator 1 view .LVU55
+ 216 003a B4F5F07F 		cmp	r4, #480
+ 217 003e E2D3     		bcc	.L15
+ 218              	.LBE6:
+  50:Core/Src/audio_test.c **** 
+ 219              		.loc 1 50 1 is_stmt 0 view .LVU56
+ 220 0040 10BD     		pop	{r4, pc}
+ 221              	.LVL19:
+ 222              	.L18:
+  50:Core/Src/audio_test.c **** 
+ 223              		.loc 1 50 1 view .LVU57
+ 224 0042 00BF     		.align	2
+ 225              	.L17:
+ 226 0044 DB0FC940 		.word	1086918619
+ 227 0048 0000F043 		.word	1139802112
+ 228 004c CDCC4C4D 		.word	1296878797
+ 229 0050 00000000 		.word	sine_table
+ 230              		.cfi_endproc
+ARM GAS  /tmp/ccnytQ4w.s 			page 7
+
+
+ 231              	.LFE220:
+ 233              		.section	.text.audio_test_start,"ax",%progbits
+ 234              		.align	1
+ 235              		.global	audio_test_start
+ 236              		.syntax unified
+ 237              		.thumb
+ 238              		.thumb_func
+ 240              	audio_test_start:
+ 241              	.LFB223:
+  87:Core/Src/audio_test.c **** 
+  88:Core/Src/audio_test.c **** void audio_test_start(void)
+  89:Core/Src/audio_test.c **** {
+ 242              		.loc 1 89 1 is_stmt 1 view -0
+ 243              		.cfi_startproc
+ 244              		@ args = 0, pretend = 0, frame = 0
+ 245              		@ frame_needed = 0, uses_anonymous_args = 0
+ 246 0000 08B5     		push	{r3, lr}
+ 247              	.LCFI2:
+ 248              		.cfi_def_cfa_offset 8
+ 249              		.cfi_offset 3, -8
+ 250              		.cfi_offset 14, -4
+  90:Core/Src/audio_test.c ****     sine_table_init();
+ 251              		.loc 1 90 5 view .LVU59
+ 252 0002 FFF7FEFF 		bl	sine_table_init
+ 253              	.LVL20:
+  91:Core/Src/audio_test.c ****     fill_audio_buffer();
+ 254              		.loc 1 91 5 view .LVU60
+ 255 0006 FFF7FEFF 		bl	fill_audio_buffer
+ 256              	.LVL21:
+  92:Core/Src/audio_test.c **** 
+  93:Core/Src/audio_test.c ****     /*
+  94:Core/Src/audio_test.c ****      * Important STM32 HAL I2S quirk:
+  95:Core/Src/audio_test.c ****      *
+  96:Core/Src/audio_test.c ****      * In 32-bit I2S mode, HAL_I2S_Transmit_DMA() expects the number
+  97:Core/Src/audio_test.c ****      * of 32-bit audio samples, not the number of uint16_t halfwords.
+  98:Core/Src/audio_test.c ****      *
+  99:Core/Src/audio_test.c ****      * HAL internally doubles the DMA transfer count because each
+ 100:Core/Src/audio_test.c ****      * 32-bit I2S sample is sent as two 16-bit writes.
+ 101:Core/Src/audio_test.c ****      *
+ 102:Core/Src/audio_test.c ****      * For stereo:
+ 103:Core/Src/audio_test.c ****      * 480 frames × 2 channels = 960 32-bit samples.
+ 104:Core/Src/audio_test.c ****      * HAL turns that into 1920 halfword DMA transfers.
+ 105:Core/Src/audio_test.c ****      */
+ 106:Core/Src/audio_test.c ****     HAL_StatusTypeDef st = HAL_I2S_Transmit_DMA(
+ 257              		.loc 1 106 5 view .LVU61
+ 258              		.loc 1 106 28 is_stmt 0 view .LVU62
+ 259 000a 4FF47072 		mov	r2, #960
+ 260 000e 0449     		ldr	r1, .L23
+ 261 0010 0448     		ldr	r0, .L23+4
+ 262 0012 FFF7FEFF 		bl	HAL_I2S_Transmit_DMA
+ 263              	.LVL22:
+ 107:Core/Src/audio_test.c ****         &hi2s1,
+ 108:Core/Src/audio_test.c ****         audio_buffer,
+ 109:Core/Src/audio_test.c ****         AUDIO_BUFFER_FRAMES * AUDIO_CHANNELS
+ 110:Core/Src/audio_test.c ****     );
+ 111:Core/Src/audio_test.c **** 
+ 112:Core/Src/audio_test.c ****     if (st != HAL_OK)
+ARM GAS  /tmp/ccnytQ4w.s 			page 8
+
+
+ 264              		.loc 1 112 5 is_stmt 1 view .LVU63
+ 265              		.loc 1 112 8 is_stmt 0 view .LVU64
+ 266 0016 00B9     		cbnz	r0, .L22
+ 267              	.LVL23:
+ 268              	.L19:
+ 113:Core/Src/audio_test.c ****     {
+ 114:Core/Src/audio_test.c ****         Error_Handler();
+ 115:Core/Src/audio_test.c ****     }
+ 116:Core/Src/audio_test.c **** }
+ 269              		.loc 1 116 1 view .LVU65
+ 270 0018 08BD     		pop	{r3, pc}
+ 271              	.LVL24:
+ 272              	.L22:
+ 114:Core/Src/audio_test.c ****     }
+ 273              		.loc 1 114 9 is_stmt 1 view .LVU66
+ 274 001a FFF7FEFF 		bl	Error_Handler
+ 275              	.LVL25:
+ 276              		.loc 1 116 1 is_stmt 0 view .LVU67
+ 277 001e FBE7     		b	.L19
+ 278              	.L24:
+ 279              		.align	2
+ 280              	.L23:
+ 281 0020 00000000 		.word	audio_buffer
+ 282 0024 00000000 		.word	hi2s1
+ 283              		.cfi_endproc
+ 284              	.LFE223:
+ 286              		.section	.text.audio_test_stop,"ax",%progbits
+ 287              		.align	1
+ 288              		.global	audio_test_stop
+ 289              		.syntax unified
+ 290              		.thumb
+ 291              		.thumb_func
+ 293              	audio_test_stop:
+ 294              	.LFB224:
+ 117:Core/Src/audio_test.c **** 
+ 118:Core/Src/audio_test.c **** void audio_test_stop(void)
+ 119:Core/Src/audio_test.c **** {
+ 295              		.loc 1 119 1 is_stmt 1 view -0
+ 296              		.cfi_startproc
+ 297              		@ args = 0, pretend = 0, frame = 0
+ 298              		@ frame_needed = 0, uses_anonymous_args = 0
+ 299 0000 08B5     		push	{r3, lr}
+ 300              	.LCFI3:
+ 301              		.cfi_def_cfa_offset 8
+ 302              		.cfi_offset 3, -8
+ 303              		.cfi_offset 14, -4
+ 120:Core/Src/audio_test.c ****     HAL_I2S_DMAStop(&hi2s1);
+ 304              		.loc 1 120 5 view .LVU69
+ 305 0002 0248     		ldr	r0, .L27
+ 306 0004 FFF7FEFF 		bl	HAL_I2S_DMAStop
+ 307              	.LVL26:
+ 121:Core/Src/audio_test.c **** }...
+ 308              		.loc 1 121 1 is_stmt 0 view .LVU70
+ 309 0008 08BD     		pop	{r3, pc}
+ 310              	.L28:
+ 311 000a 00BF     		.align	2
+ 312              	.L27:
+ARM GAS  /tmp/ccnytQ4w.s 			page 9
+
+
+ 313 000c 00000000 		.word	hi2s1
+ 314              		.cfi_endproc
+ 315              	.LFE224:
+ 317              		.section	.bss.sine_table,"aw",%nobits
+ 318              		.align	2
+ 321              	sine_table:
+ 322 0000 00000000 		.space	1920
+ 322      00000000 
+ 322      00000000 
+ 322      00000000 
+ 322      00000000 
+ 323              		.section	.bss.audio_buffer,"aw",%nobits
+ 324              		.align	2
+ 327              	audio_buffer:
+ 328 0000 00000000 		.space	3840
+ 328      00000000 
+ 328      00000000 
+ 328      00000000 
+ 328      00000000 
+ 329              		.text
+ 330              	.Letext0:
+ 331              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
+ 332              		.file 3 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h"
+ 333              		.file 4 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 334              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 335              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2s.h"
+ 336              		.file 7 "/usr/include/newlib/math.h"
+ 337              		.file 8 "Core/Inc/i2s.h"
+ 338              		.file 9 "Core/Inc/main.h"
+ARM GAS  /tmp/ccnytQ4w.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 audio_test.c
+     /tmp/ccnytQ4w.s:21     .text.audio_buffer_put_frame:00000000 $t
+     /tmp/ccnytQ4w.s:26     .text.audio_buffer_put_frame:00000000 audio_buffer_put_frame
+     /tmp/ccnytQ4w.s:68     .text.audio_buffer_put_frame:00000028 $d
+     /tmp/ccnytQ4w.s:327    .bss.audio_buffer:00000000 audio_buffer
+     /tmp/ccnytQ4w.s:73     .text.fill_audio_buffer:00000000 $t
+     /tmp/ccnytQ4w.s:78     .text.fill_audio_buffer:00000000 fill_audio_buffer
+     /tmp/ccnytQ4w.s:152    .text.fill_audio_buffer:0000002c $d
+     /tmp/ccnytQ4w.s:321    .bss.sine_table:00000000 sine_table
+     /tmp/ccnytQ4w.s:157    .text.sine_table_init:00000000 $t
+     /tmp/ccnytQ4w.s:162    .text.sine_table_init:00000000 sine_table_init
+     /tmp/ccnytQ4w.s:226    .text.sine_table_init:00000044 $d
+     /tmp/ccnytQ4w.s:234    .text.audio_test_start:00000000 $t
+     /tmp/ccnytQ4w.s:240    .text.audio_test_start:00000000 audio_test_start
+     /tmp/ccnytQ4w.s:281    .text.audio_test_start:00000020 $d
+     /tmp/ccnytQ4w.s:287    .text.audio_test_stop:00000000 $t
+     /tmp/ccnytQ4w.s:293    .text.audio_test_stop:00000000 audio_test_stop
+     /tmp/ccnytQ4w.s:313    .text.audio_test_stop:0000000c $d
+     /tmp/ccnytQ4w.s:318    .bss.sine_table:00000000 $d
+     /tmp/ccnytQ4w.s:324    .bss.audio_buffer:00000000 $d
+
+UNDEFINED SYMBOLS
+sinf
+HAL_I2S_Transmit_DMA
+Error_Handler
+hi2s1
+HAL_I2S_DMAStop

@@ -5,7 +5,7 @@
 #include <stdint.h>
 
 #define AUDIO_SAMPLE_RATE_HZ     48000u
-#define SINE_FREQ_HZ             100u
+#define SINE_FREQ_HZ             1000u
 #define SINE_TABLE_SIZE          (AUDIO_SAMPLE_RATE_HZ / SINE_FREQ_HZ)
 
 /*

@@ -30,6 +30,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "audio_test.h"
+#include "buttons.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -106,8 +107,13 @@ int main(void)
 
   // Status LED testing
 
-  HAL_GPIO_WritePin(BAT_STATUS_GPIO_Port, BAT_STATUS_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(BAT_CHARGING_STATUS_GPIO_Port, BAT_CHARGING_STATUS_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(BAT_STATUS_GPIO_Port, BAT_STATUS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(BAT_CHARGING_STATUS_GPIO_Port, BAT_CHARGING_STATUS_Pin, GPIO_PIN_RESET);
+
+  // Button Testing
+
+  buttons_init();
+  volatile button_state_t button_state = {};
   
   // Audio testing
 
@@ -120,7 +126,19 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+    // Poll the 4 buttons
+    buttons_poll();
+    button_state = buttons_get_state();
 
+    if (button_state.button_3) {
+      HAL_GPIO_WritePin(BAT_STATUS_GPIO_Port, BAT_STATUS_Pin, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(BAT_CHARGING_STATUS_GPIO_Port, BAT_CHARGING_STATUS_Pin, GPIO_PIN_SET);
+    } else {
+      HAL_GPIO_WritePin(BAT_STATUS_GPIO_Port, BAT_STATUS_Pin, GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(BAT_CHARGING_STATUS_GPIO_Port, BAT_CHARGING_STATUS_Pin, GPIO_PIN_RESET);
+    }
+
+    HAL_Delay(10);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

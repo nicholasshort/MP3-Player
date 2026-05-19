@@ -32,6 +32,16 @@ OPT = -Og
 BUILD_DIR = build
 
 ######################################
+# debug tools
+######################################
+OPENOCD ?= openocd
+GDB ?= gdb-multiarch
+
+OPENOCD_CFG = -f interface/stlink.cfg -f target/stm32f4x.cfg
+OPENOCD_LOG = /tmp/openocd-$(TARGET).log
+
+
+######################################
 # source
 ######################################
 # C sources
@@ -48,6 +58,7 @@ Core/Src/usb_otg.c \
 Core/Src/stm32f4xx_it.c \
 Core/Src/stm32f4xx_hal_msp.c \
 Core/Src/audio_test.c \
+Core/Src/buttons.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c \
@@ -194,6 +205,7 @@ $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR)
 
 $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
 	$(AS) -c $(CFLAGS) $< -o $@
+
 $(BUILD_DIR)/%.o: %.S Makefile | $(BUILD_DIR)
 	$(AS) -c $(CFLAGS) $< -o $@
 
@@ -210,24 +222,40 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir $@		
 
+
 #######################################
 # clean up
 #######################################
 clean:
 	-rm -fR $(BUILD_DIR)
 
+
 #######################################
 # flash/debug helpers
 #######################################
 flash: all
-	openocd -f interface/stlink.cfg -f target/stm32f4x.cfg -c "program $(BUILD_DIR)/$(TARGET).elf verify reset exit"
+	$(OPENOCD) $(OPENOCD_CFG) -c "program $(BUILD_DIR)/$(TARGET).elf verify reset exit"
 
 openocd:
-	openocd -f interface/stlink.cfg -f target/stm32f4x.cfg
+	$(OPENOCD) $(OPENOCD_CFG)
 
 reset:
-	openocd -f interface/stlink.cfg -f target/stm32f4x.cfg -c "init; reset run; exit"
-  
+	$(OPENOCD) $(OPENOCD_CFG) -c "init; reset run; exit"
+
+debug: all
+	@echo "Starting OpenOCD..."
+	@$(OPENOCD) $(OPENOCD_CFG) > $(OPENOCD_LOG) 2>&1 & \
+	OCD_PID=$$!; \
+	trap 'echo "Stopping OpenOCD..."; kill $$OCD_PID >/dev/null 2>&1 || true' EXIT INT TERM; \
+	sleep 1; \
+	echo "Starting GDB..."; \
+	$(GDB) $(BUILD_DIR)/$(TARGET).elf \
+		-ex "target extended-remote localhost:3333" \
+		-ex "monitor reset halt" \
+		-ex "break main" \
+		-ex "continue"
+
+
 #######################################
 # dependencies
 #######################################

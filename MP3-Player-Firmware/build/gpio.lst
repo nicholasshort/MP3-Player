@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cca7JyKi.s 			page 1
+ARM GAS  /tmp/ccQwoQnM.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cca7JyKi.s 			page 1
   28:Core/Src/gpio.c **** /*----------------------------------------------------------------------------*/
   29:Core/Src/gpio.c **** /* Configure GPIO                                                             */
   30:Core/Src/gpio.c **** /*----------------------------------------------------------------------------*/
-ARM GAS  /tmp/cca7JyKi.s 			page 2
+ARM GAS  /tmp/ccQwoQnM.s 			page 2
 
 
   31:Core/Src/gpio.c **** /* USER CODE BEGIN 1 */
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cca7JyKi.s 			page 1
   65              		.loc 1 48 3 view .LVU7
   66 0024 019A     		ldr	r2, [sp, #4]
   67              	.LBE2:
-ARM GAS  /tmp/cca7JyKi.s 			page 3
+ARM GAS  /tmp/ccQwoQnM.s 			page 3
 
 
   68              		.loc 1 48 3 view .LVU8
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cca7JyKi.s 			page 1
   54:Core/Src/gpio.c ****   HAL_GPIO_WritePin(LEDS_PWR_EN_GPIO_Port, LEDS_PWR_EN_Pin, GPIO_PIN_RESET);
  117              		.loc 1 54 3 view .LVU27
  118 0062 204E     		ldr	r6, .L3+4
-ARM GAS  /tmp/cca7JyKi.s 			page 4
+ARM GAS  /tmp/ccQwoQnM.s 			page 4
 
 
  119 0064 2246     		mov	r2, r4
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cca7JyKi.s 			page 1
  158              		.loc 1 69 25 is_stmt 0 view .LVU43
  159 0098 0894     		str	r4, [sp, #32]
   70:Core/Src/gpio.c ****   HAL_GPIO_Init(LEDS_PWR_EN_GPIO_Port, &GPIO_InitStruct);
-ARM GAS  /tmp/cca7JyKi.s 			page 5
+ARM GAS  /tmp/ccQwoQnM.s 			page 5
 
 
  160              		.loc 1 70 3 is_stmt 1 view .LVU44
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cca7JyKi.s 			page 1
   87:Core/Src/gpio.c ****   /*Configure GPIO pins : BAT_NPG_Pin BAT_STAT_Pin BAT_INT_Pin */
   88:Core/Src/gpio.c ****   GPIO_InitStruct.Pin = BAT_NPG_Pin|BAT_STAT_Pin|BAT_INT_Pin;
  198              		.loc 1 88 3 view .LVU61
-ARM GAS  /tmp/cca7JyKi.s 			page 6
+ARM GAS  /tmp/ccQwoQnM.s 			page 6
 
 
  199              		.loc 1 88 23 is_stmt 0 view .LVU62
@@ -340,14 +340,14 @@ ARM GAS  /tmp/cca7JyKi.s 			page 1
  231              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
  232              		.file 3 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h"
  233              		.file 4 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
-ARM GAS  /tmp/cca7JyKi.s 			page 7
+ARM GAS  /tmp/ccQwoQnM.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 gpio.c
-     /tmp/cca7JyKi.s:21     .text.MX_GPIO_Init:00000000 $t
-     /tmp/cca7JyKi.s:27     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
-     /tmp/cca7JyKi.s:222    .text.MX_GPIO_Init:000000e0 $d
+     /tmp/ccQwoQnM.s:21     .text.MX_GPIO_Init:00000000 $t
+     /tmp/ccQwoQnM.s:27     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
+     /tmp/ccQwoQnM.s:222    .text.MX_GPIO_Init:000000e0 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin

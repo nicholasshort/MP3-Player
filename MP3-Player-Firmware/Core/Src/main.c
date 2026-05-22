@@ -30,7 +30,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "audio_test.h"
-#include "buttons.h"
+#include "buttons_test.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -118,6 +118,40 @@ int main(void)
   // Audio testing
 
   audio_test_start();
+
+  // USB Charger Testing
+
+  #define BQ24259_ADDR_7BIT 0x6B
+  #define BQ24259_ADDR_HAL   (BQ24259_ADDR_7BIT << 1)
+  uint8_t reg = 0;
+  HAL_StatusTypeDef ret;
+
+  ret = HAL_I2C_IsDeviceReady(&hi2c1, 0x6B << 1, 3, 100);
+
+  // Vender / Part / Revision Status Register
+  ret = HAL_I2C_Mem_Read(
+      &hi2c1,
+      0x6B << 1,
+      0x0A,
+      I2C_MEMADD_SIZE_8BIT,
+      &reg,
+      1,
+      100
+  );
+
+  // System Status Register (0b01100100, or d100 is good)
+  ret = HAL_I2C_Mem_Read(
+      &hi2c1,
+      0x6B << 1,
+      0x08,
+      I2C_MEMADD_SIZE_8BIT,
+      &reg,
+      1,
+      100
+  );
+  
+  if (ret != HAL_OK) 
+    Error_Handler();
 
   /* USER CODE END 2 */
 

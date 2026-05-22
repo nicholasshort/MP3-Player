@@ -31,6 +31,7 @@
 /* USER CODE BEGIN Includes */
 #include "audio_test.h"
 #include "buttons_test.h"
+#include "sd_test.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -149,8 +150,16 @@ int main(void)
       1,
       100
   );
-  
+
   if (ret != HAL_OK) 
+    Error_Handler();
+
+  // SD Basic Test
+  volatile uint8_t sd_cmd0_response = 0x00;
+
+  sd_cmd0_response = sd_basic_test();
+
+  if (sd_cmd0_response != 0x01)
     Error_Handler();
 
   /* USER CODE END 2 */
@@ -159,7 +168,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
+
     // Poll the 4 buttons
     buttons_poll();
     button_state = buttons_get_state();
@@ -171,8 +180,8 @@ int main(void)
       HAL_GPIO_WritePin(BAT_STATUS_GPIO_Port, BAT_STATUS_Pin, GPIO_PIN_RESET);
       HAL_GPIO_WritePin(BAT_CHARGING_STATUS_GPIO_Port, BAT_CHARGING_STATUS_Pin, GPIO_PIN_RESET);
     }
+    /* USER CODE END WHILE */
 
-    HAL_Delay(10);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

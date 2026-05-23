@@ -121,8 +121,8 @@ bq24259_result_e bq24259_init(void) {
     if (ret != BQ24259_RESULT_OK)
         return ret;
     
-    // Set ICHG to 384mA (at least at beginning) (Set 6:2 to 00110)
-    ret = bq24259_reg_update_bits_verify(BQ24259_CHARGE_CURRENT_CONTROL_REGISTER, (0x1F << 2), (0x18));
+    // Set ICHG to 512mA (at least at beginning) (Set 6:2 to 00000)
+    ret = bq24259_reg_update_bits_verify(BQ24259_CHARGE_CURRENT_CONTROL_REGISTER, (0x1F << 2), (0x00));
     if (ret != BQ24259_RESULT_OK)
         return ret;
     
@@ -199,9 +199,24 @@ bq24259_result_e bq24259_read_current_fault (bq24259_fault_t*  fault ) {
 
 }
 
+bq24259_result_e bq24259_enable_charging(void) {
+
+    // Update Bit 4 to 1 to enable charging 
+    return bq24259_reg_update_bits_verify(BQ24259_POWER_ON_CONFIGURATION_REGISTER, (0x10), (0x10));
+
+}
+
+bq24259_result_e bq24259_disable_charging(void) {
+
+    // Update Bit 4 to 0 to disable charging 
+    return bq24259_reg_update_bits_verify(BQ24259_POWER_ON_CONFIGURATION_REGISTER, (0x10), (0x00));
+
+}
 
 bq24259_result_e bq24259_enter_shipping_mode(void) {
 
-    return BQ24259_RESULT_OK;
+    // Update Bit 5 to 1 to turn off BATFET 
+    // Not verifying write since system will likely turn off right away
+    return bq24259_reg_update_bits(BQ24259_MISC_OPERATION_CONTROL_REGISTER, (0x20), (0x20));
 
 }

@@ -53,21 +53,12 @@ typedef struct {
     bool                        ntc_fault_hot;
 } bq24259_fault_t;
 
-
-/*
-TODO: 
-    bq24259_read_status()
-    bq24259_read_faults()
-    bq24259_enter_ship_mode()
-    bq24259_set_input_current_limit()   // maybe, if you adapt to USB source
-    bq24259_enable_charging() / disable_charging()
-*/ 
-
 bq24259_result_e bq24259_read_status(bq24259_status_t* status);
 bq24259_result_e bq24259_read_fault (bq24259_fault_t*  fault ); // The registers latch events (e.g. unplugging and replugging in usb will show input fault)
 bq24259_result_e bq24259_read_current_fault (bq24259_fault_t*  fault ); // Reads fault register twice to delatch old values to leave only current fault states
+bq24259_result_e bq24259_enable_charging(void);
+bq24259_result_e bq24259_disable_charging(void);
 bq24259_result_e bq24259_enter_shipping_mode(void);
-
 bq24259_result_e bq24259_init(void);
 
 #endif // BQ24259_H

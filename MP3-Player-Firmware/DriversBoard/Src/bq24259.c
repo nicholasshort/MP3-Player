@@ -6,13 +6,17 @@
 #define BQ24259_DEVICE_ADDRESS      ((0x6B) << 1)
 #define BQ24259_I2C_TIMEOUT_MS      100
 
-#define BQ24259_VENDER_PART_REVISION_STATUS_REGISTER                0x0A
-#define BQ24259_CHARGE_TERMINATION_TIMER_CONTROL_REGISTER           0x05
-#define BQ24259_POWER_ON_CONFIGURATION_REGISTER                     0x01
 #define BQ24259_INPUT_SOURCE_CONTROL_REGISTER                       0x00
+#define BQ24259_POWER_ON_CONFIGURATION_REGISTER                     0x01
 #define BQ24259_CHARGE_CURRENT_CONTROL_REGISTER                     0x02
 #define BQ24259_PRE_CHARGE_TERMINATION_CURRENT_CONTROL_REGISTER     0x03
 #define BQ24259_CHARGE_VOLTAGE_CONTROL_REGISTER                     0x04
+#define BQ24259_CHARGE_TERMINATION_TIMER_CONTROL_REGISTER           0x05
+#define BQ24259_BOOST_VOLTAGE_THERMAL_REGULATION_CONTROL_REGISTER   0x06
+#define BQ24259_MISC_OPERATION_CONTROL_REGISTER                     0x07
+#define BQ24259_SYSTEM_STATUS_REGISTER                              0x08
+#define BQ24259_NEW_FAULT_REGISTER                                  0x09
+#define BQ24259_VENDER_PART_REVISION_STATUS_REGISTER                0x0A
 
 static bq24259_result_e bq24259_reg_read(uint8_t reg, uint8_t* value) {
 
@@ -132,6 +136,71 @@ bq24259_result_e bq24259_init(void) {
     ret = bq24259_reg_write_verify(BQ24259_CHARGE_VOLTAGE_CONTROL_REGISTER, (0xB2));
     if (ret != BQ24259_RESULT_OK)
         return ret;
+
+    return BQ24259_RESULT_OK;
+
+}
+
+bq24259_result_e bq24259_read_status(bq24259_status_t* status) {
+
+    if (status == NULL)
+        return BQ24259_RESULT_INVALID_ARG;
+
+    uint8_t status_reg_raw;
+    bq24259_result_e ret = bq24259_reg_read(BQ24259_SYSTEM_STATUS_REGISTER, &status_reg_raw);
+    if (ret != BQ24259_RESULT_OK)
+        return ret;
+    
+    status->vbus_status     = (status_reg_raw >> 6);
+    status->charge_status   = ((status_reg_raw << 2) >> 6);
+    status->dpm_status      = ((status_reg_raw << 4) >> 7);
+    status->pg_status       = ((status_reg_raw << 5) >> 7);
+    status->therm_status    = ((status_reg_raw << 6) >> 7);
+    status->vsys_status     = ((status_reg_raw << 7) >> 7);
+
+    return BQ24259_RESULT_OK;
+
+}
+
+bq24259_result_e bq24259_read_fault (bq24259_fault_t*  fault ) {
+
+    if (fault == NULL)
+        return BQ24259_RESULT_INVALID_ARG;
+        
+    uint8_t fault_reg_raw;
+    bq24259_result_e ret = bq24259_reg_read(BQ24259_NEW_FAULT_REGISTER, &fault_reg_raw);
+    if (ret != BQ24259_RESULT_OK)
+        return ret;
+    
+    fault->watchdog_fault = (fault_reg_raw >> 7);
+    fault->otg_fault      = ((fault_reg_raw << 1) >> 7);
+    fault->charge_fault   = ((fault_reg_raw << 2) >> 6);
+    fault->bat_fault      = ((fault_reg_raw << 4) >> 7);
+    fault->ntc_fault_cold = ((fault_reg_raw << 6) >> 7);
+    fault->ntc_fault_hot  = ((fault_reg_raw << 7) >> 7);
+
+    return BQ24259_RESULT_OK;
+
+}
+
+bq24259_result_e bq24259_read_current_fault (bq24259_fault_t*  fault ) {
+
+    if (fault == NULL)
+        return BQ24259_RESULT_INVALID_ARG;
+    
+    bq24259_result_e ret = bq24259_read_fault(fault);
+    if (ret != BQ24259_RESULT_OK)
+        return ret;
+    ret = bq24259_read_fault(fault);
+    if (ret != BQ24259_RESULT_OK)
+        return ret;
+    
+    return BQ24259_RESULT_OK;
+
+}
+
+
+bq24259_result_e bq24259_enter_shipping_mode(void) {
 
     return BQ24259_RESULT_OK;
 

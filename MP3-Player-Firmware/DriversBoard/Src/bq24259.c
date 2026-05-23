@@ -150,13 +150,13 @@ bq24259_result_e bq24259_read_status(bq24259_status_t* status) {
     bq24259_result_e ret = bq24259_reg_read(BQ24259_SYSTEM_STATUS_REGISTER, &status_reg_raw);
     if (ret != BQ24259_RESULT_OK)
         return ret;
-    
-    status->vbus_status     = (status_reg_raw >> 6);
-    status->charge_status   = ((status_reg_raw << 2) >> 6);
-    status->dpm_status      = ((status_reg_raw << 4) >> 7);
-    status->pg_status       = ((status_reg_raw << 5) >> 7);
-    status->therm_status    = ((status_reg_raw << 6) >> 7);
-    status->vsys_status     = ((status_reg_raw << 7) >> 7);
+
+    status->vbus_status     = (bq24259_vbus_status_e)((status_reg_raw >> 6) & 0x03);
+    status->charge_status   = (bq24259_charge_status_e)((status_reg_raw >> 4) & 0x03);
+    status->dpm_status      = (((status_reg_raw >> 3) & 0x01) != 0);
+    status->pg_status       = (((status_reg_raw >> 2) & 0x01) != 0);
+    status->therm_status    = (((status_reg_raw >> 1) & 0x01) != 0);
+    status->vsys_status     = (((status_reg_raw >> 0) & 0x01) != 0);
 
     return BQ24259_RESULT_OK;
 
@@ -172,12 +172,12 @@ bq24259_result_e bq24259_read_fault (bq24259_fault_t*  fault ) {
     if (ret != BQ24259_RESULT_OK)
         return ret;
     
-    fault->watchdog_fault = (fault_reg_raw >> 7);
-    fault->otg_fault      = ((fault_reg_raw << 1) >> 7);
-    fault->charge_fault   = ((fault_reg_raw << 2) >> 6);
-    fault->bat_fault      = ((fault_reg_raw << 4) >> 7);
-    fault->ntc_fault_cold = ((fault_reg_raw << 6) >> 7);
-    fault->ntc_fault_hot  = ((fault_reg_raw << 7) >> 7);
+    fault->charge_fault     = (bq24259_charge_fault_e)((fault_reg_raw >> 4) & 0x03);
+    fault->watchdog_fault   = (((fault_reg_raw >> 7) & 0x01) != 0);
+    fault->otg_fault        = (((fault_reg_raw >> 6) & 0x01) != 0);
+    fault->bat_fault        = (((fault_reg_raw >> 3) & 0x01) != 0);
+    fault->ntc_fault_cold   = (((fault_reg_raw >> 1) & 0x01) != 0);
+    fault->ntc_fault_hot    = (((fault_reg_raw >> 0) & 0x01) != 0);
 
     return BQ24259_RESULT_OK;
 

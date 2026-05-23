@@ -108,8 +108,13 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  bq24259_status_t status;
+  bq24259_fault_t fault;
   while (1)
   {
+    bq24259_read_status(&status);
+    bq24259_read_current_fault(&fault);
+    HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

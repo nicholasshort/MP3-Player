@@ -29,9 +29,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "audio_test.h"
-#include "buttons_test.h"
-#include "sd_test.h"
+#include "bq24259.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -105,81 +103,13 @@ int main(void)
   MX_USB_OTG_FS_PCD_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-
-  // Status LED testing
-
-  HAL_GPIO_WritePin(BAT_STATUS_GPIO_Port, BAT_STATUS_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(BAT_CHARGING_STATUS_GPIO_Port, BAT_CHARGING_STATUS_Pin, GPIO_PIN_RESET);
-
-  // Button Testing
-
-  buttons_init();
-  volatile button_state_t button_state = {};
-  
-  // Audio testing
-
-  audio_test_start();
-
-  // USB Charger Testing
-
-  #define BQ24259_ADDR_7BIT 0x6B
-  #define BQ24259_ADDR_HAL   (BQ24259_ADDR_7BIT << 1)
-  uint8_t reg = 0;
-  HAL_StatusTypeDef ret;
-
-  ret = HAL_I2C_IsDeviceReady(&hi2c1, 0x6B << 1, 3, 100);
-
-  // Vender / Part / Revision Status Register
-  ret = HAL_I2C_Mem_Read(
-      &hi2c1,
-      0x6B << 1,
-      0x0A,
-      I2C_MEMADD_SIZE_8BIT,
-      &reg,
-      1,
-      100
-  );
-
-  // System Status Register (0b01100100, or d100 is good)
-  ret = HAL_I2C_Mem_Read(
-      &hi2c1,
-      0x6B << 1,
-      0x08,
-      I2C_MEMADD_SIZE_8BIT,
-      &reg,
-      1,
-      100
-  );
-
-  if (ret != HAL_OK) 
-    Error_Handler();
-
-  // SD Basic Test
-  volatile uint8_t sd_cmd0_response = 0x00;
-
-  sd_cmd0_response = sd_basic_test();
-
-  if (sd_cmd0_response != 0x01)
-    Error_Handler();
-
+  bq24259_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
-    // Poll the 4 buttons
-    buttons_poll();
-    button_state = buttons_get_state();
-
-    if (button_state.button_3) {
-      HAL_GPIO_WritePin(BAT_STATUS_GPIO_Port, BAT_STATUS_Pin, GPIO_PIN_SET);
-      HAL_GPIO_WritePin(BAT_CHARGING_STATUS_GPIO_Port, BAT_CHARGING_STATUS_Pin, GPIO_PIN_SET);
-    } else {
-      HAL_GPIO_WritePin(BAT_STATUS_GPIO_Port, BAT_STATUS_Pin, GPIO_PIN_RESET);
-      HAL_GPIO_WritePin(BAT_CHARGING_STATUS_GPIO_Port, BAT_CHARGING_STATUS_Pin, GPIO_PIN_RESET);
-    }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

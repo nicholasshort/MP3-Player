@@ -27,14 +27,14 @@ typedef struct {
 
 static button_state_t buttons_state[BUTTON_ID_COUNT] = {0};
 
-static GPIO_TypeDef* button_id_to_gpio_port_map[BUTTON_ID_COUNT] = {
+static GPIO_TypeDef* const button_id_to_gpio_port_map[BUTTON_ID_COUNT] = {
     [BUTTON_ID_PLAY]        = BUTTON_PLAY_GPIO_Port,
     [BUTTON_ID_NEXT]        = BUTTON_NEXT_GPIO_Port,
     [BUTTON_ID_MENU]        = BUTTON_MENU_GPIO_Port,
     [BUTTON_ID_PREV_PWR]    = BUTTON_PREV_PWR_GPIO_Port
 };
 
-static uint16_t button_id_to_gpio_pin_map[BUTTON_ID_COUNT] = {
+static const uint16_t button_id_to_gpio_pin_map[BUTTON_ID_COUNT] = {
     [BUTTON_ID_PLAY]        = BUTTON_PLAY_Pin,
     [BUTTON_ID_NEXT]        = BUTTON_NEXT_Pin,
     [BUTTON_ID_MENU]        = BUTTON_MENU_Pin,
@@ -73,6 +73,8 @@ void buttons_init(void) {
 
 void buttons_update_state_poll_1ms(void) {
 
+    uint32_t now = HAL_GetTick();
+
     for (uint8_t i = 0; i < BUTTON_ID_COUNT; i++) {
         bool curr_pressed = buttons_read_raw((button_id_e)i);
 
@@ -81,10 +83,10 @@ void buttons_update_state_poll_1ms(void) {
 
             if (!buttons_state[i].edge_debounce_active) {
                 buttons_state[i].edge_debounce_active = true;
-                buttons_state[i].candidate_edge_tick = HAL_GetTick();
+                buttons_state[i].candidate_edge_tick = now;
             }
             
-            uint32_t edge_stable_time = (HAL_GetTick() - buttons_state[i].candidate_edge_tick);
+            uint32_t edge_stable_time = (now - buttons_state[i].candidate_edge_tick);
             if (edge_stable_time >= BUTTON_DEBOUNCE_EDGE_THRESHOLD_MS) {
 
                 buttons_state[i].stable_pressed = curr_pressed;

@@ -120,8 +120,10 @@ int main(void)
     // bq24259_read_current_fault(&fault);
     // HAL_Delay(1000);
     buttons_update_state_poll_1ms();
-    for (uint8_t i = 0; i < BUTTON_ID_COUNT; i++) {
-      bool button_pressed = buttons_is_pressed((button_id_e)i);
+    
+    button_event_t event;
+    while(buttons_get_event(&event)) {
+      __NOP();
     }
     HAL_Delay(1);
     /* USER CODE END WHILE */

@@ -30,6 +30,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "bq24259.h"
+#include "buttons.h"
+
+#include <stdint.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -104,17 +107,23 @@ int main(void)
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
   bq24259_init();
+  buttons_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  bq24259_status_t status;
-  bq24259_fault_t fault;
+  // bq24259_status_t status;
+  // bq24259_fault_t fault;
   while (1)
   {
-    bq24259_read_status(&status);
-    bq24259_read_current_fault(&fault);
-    HAL_Delay(1000);
+    // bq24259_read_status(&status);
+    // bq24259_read_current_fault(&fault);
+    // HAL_Delay(1000);
+    buttons_update_state_poll_1ms();
+    for (uint8_t i = 0; i < BUTTON_ID_COUNT; i++) {
+      bool button_pressed = buttons_is_pressed((button_id_e)i);
+    }
+    HAL_Delay(1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

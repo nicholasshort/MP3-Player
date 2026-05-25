@@ -1,6 +1,5 @@
 #include "buttons.h"
-#include "main.h"
-#include "stm32f4xx_hal.h"
+#include "gpio.h"
 #include <stdint.h>
 #include <stddef.h>
 

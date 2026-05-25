@@ -31,6 +31,7 @@
 /* USER CODE BEGIN Includes */
 #include "bq24259.h"
 #include "buttons.h"
+#include "status_leds.h"
 
 #include <stdint.h>
 /* USER CODE END Includes */
@@ -108,18 +109,22 @@ int main(void)
   /* USER CODE BEGIN 2 */
   bq24259_init();
   buttons_init();
+  status_leds_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   // bq24259_status_t status;
   // bq24259_fault_t fault;
+  status_leds_set_mode(STATUS_LED_GREEN, STATUS_LED_MODE_BLINK_SLOW);
+  status_leds_set_mode(STATUS_LED_BLUE, STATUS_LED_MODE_BLINK_FAST);
   while (1)
   {
     // bq24259_read_status(&status);
     // bq24259_read_current_fault(&fault);
     // HAL_Delay(1000);
     buttons_update_state_poll_1ms();
+    status_leds_update_1ms();
     
     button_event_t event;
     while(buttons_get_event(&event)) {

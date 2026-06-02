@@ -3417,7 +3417,7 @@
 		)
 		(uuid "6ef6c09b-5373-4227-a6d5-b311b95ebc12")
 	)
-	(text "Set ILIM via register"
+	(text "Set ILIM via register\n316R Allows 1.5A"
 		(exclude_from_sim no)
 		(at 165.608 74.422 0)
 		(effects

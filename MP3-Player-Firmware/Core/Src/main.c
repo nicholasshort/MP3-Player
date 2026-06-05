@@ -32,6 +32,7 @@
 #include "bq24259.h"
 #include "buttons.h"
 #include "status_leds.h"
+#include "ws2812b.h"
 
 #include <stdint.h>
 /* USER CODE END Includes */
@@ -110,6 +111,7 @@ int main(void)
   bq24259_init();
   buttons_init();
   status_leds_init();
+  ws2812b_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -118,6 +120,13 @@ int main(void)
   // bq24259_fault_t fault;
   status_leds_set_mode(STATUS_LED_GREEN, STATUS_LED_MODE_BLINK_SLOW);
   status_leds_set_mode(STATUS_LED_BLUE, STATUS_LED_MODE_BLINK_FAST);
+
+  ws2812b_set_colour(WS2812B_LED_LEFT, 255, 0, 0);
+  ws2812b_set_colour(WS2812B_LED_RIGHT, 0, 255, 0);
+  ws2812b_set_brightness(WS2812B_LED_LEFT, 255);
+  ws2812b_set_brightness(WS2812B_LED_RIGHT, 255);
+  ws2812b_update();
+  
   while (1)
   {
     // bq24259_read_status(&status);

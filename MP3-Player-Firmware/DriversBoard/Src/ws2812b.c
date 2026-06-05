@@ -144,8 +144,8 @@ ws2812b_status_e ws2812b_update(void) {
     if (dma_in_progress)
         return WS2812B_ERR_BUSY;
     
-    memcpy(dma_buffer, left_led_data.duty_cycle_bits, NUM_BITS_RGB * sizeof(dma_buffer[0]));
-    memcpy(&dma_buffer[NUM_BITS_RGB], right_led_data.duty_cycle_bits, NUM_BITS_RGB * sizeof(dma_buffer[0]));
+    memcpy(dma_buffer, right_led_data.duty_cycle_bits, NUM_BITS_RGB * sizeof(dma_buffer[0]));
+    memcpy(&dma_buffer[NUM_BITS_RGB], left_led_data.duty_cycle_bits, NUM_BITS_RGB * sizeof(dma_buffer[0]));
 
     dma_in_progress = true;
     HAL_StatusTypeDef err = HAL_TIM_PWM_Start_DMA(TIMER_HANDLE, TIMER_CHANNEL, dma_buffer, DMA_BUFFER_LEN);

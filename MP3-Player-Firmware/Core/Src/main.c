@@ -123,10 +123,10 @@ int main(void)
 
   ws2812b_set_colour(WS2812B_LED_LEFT, 255, 0, 0);
   ws2812b_set_colour(WS2812B_LED_RIGHT, 0, 255, 0);
-  ws2812b_set_brightness(WS2812B_LED_LEFT, 255);
-  ws2812b_set_brightness(WS2812B_LED_RIGHT, 255);
+  ws2812b_set_brightness(WS2812B_LED_LEFT, 30);
+  ws2812b_set_brightness(WS2812B_LED_RIGHT, 30);
   ws2812b_update();
-  
+
   while (1)
   {
     // bq24259_read_status(&status);
@@ -134,7 +134,7 @@ int main(void)
     // HAL_Delay(1000);
     buttons_update_state_poll_1ms();
     status_leds_update_1ms();
-    
+
     button_event_t event;
     while(buttons_get_event(&event)) {
       __NOP();

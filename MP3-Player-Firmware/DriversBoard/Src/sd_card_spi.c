@@ -32,6 +32,16 @@ static inline bool txrx_byte(uint8_t tx, uint8_t* rx) {
 
 }
 
+static inline bool end_transaction(void) {
+
+    ncs_high();
+
+    uint8_t rx;
+    
+    return txrx_byte(SD_CARD_SPI_DUMMY_BYTE, &rx);
+
+}
+
 static bool read_buffer(uint8_t* buffer, uint32_t len) {
 
     if (buffer == NULL)
@@ -65,7 +75,7 @@ static bool send_dummy_clocks(void) {
 
 #define SD_DUMMY_READ_REQUESTS 16
 
-static bool send_sd_command(uint8_t cmd, uint32_t argument, uint8_t crc, uint8_t* rx) {
+static bool send_command_packet_and_read_r1(uint8_t cmd, uint32_t argument, uint8_t crc, uint8_t* rx) {
 
     uint8_t tx;
     
@@ -109,10 +119,38 @@ bool sd_card_spi_card_inserted() {
 }
 
 bool sd_card_spi_test() {
+    
     bool ok = send_dummy_clocks();
-    ncs_low();
+    if (!ok)
+        return false;
+
     uint8_t rx;
-    ok &= send_sd_command(0, 0, 0x95, &rx);
-    ncs_high();
-    return (ok && (rx == 0x01u));
+
+    // Send CMD0
+    ncs_low();
+    ok &= send_command_packet_and_read_r1(0, 0, 0x95, &rx);
+    ok &= end_transaction();
+    if (rx != 0x01u || !ok) // Ensure R1 response byte
+        return false;
+        
+    
+    // Send CMD8
+    ncs_low();
+    ok &= send_command_packet_and_read_r1(8, 0x000001AA, 0x87, &rx);
+    if (rx != 0x01u || !ok) {// Ensure R1 response byte
+        end_transaction();
+        return false;
+    }
+    uint8_t r7_buffer[4];
+    ok &= read_buffer(r7_buffer, 4);
+    ok &= end_transaction();
+    if (!ok || !((r7_buffer[0] == 0x00) &&
+                 (r7_buffer[1] == 0x00) &&
+                 (r7_buffer[2] == 0x01) &&
+                 (r7_buffer[3] == 0xAA))) { // Ensure expected R7 response
+            return false;
+    }
+    
+    return ok;
+
 }

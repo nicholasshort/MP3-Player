@@ -33,6 +33,7 @@
 #include "buttons.h"
 #include "status_leds.h"
 #include "ws2812b.h"
+#include "sd_card_spi.h"
 
 #include <stdint.h>
 /* USER CODE END Includes */
@@ -112,6 +113,7 @@ int main(void)
   buttons_init();
   status_leds_init();
   ws2812b_init();
+  sd_card_spi_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -122,10 +124,12 @@ int main(void)
   status_leds_set_mode(STATUS_LED_BLUE, STATUS_LED_MODE_BLINK_FAST);
 
   ws2812b_set_colour(WS2812B_LED_LEFT, 255, 0, 0);
-  ws2812b_set_colour(WS2812B_LED_RIGHT, 0, 255, 0);
+  ws2812b_set_colour(WS2812B_LED_RIGHT, 0, 0, 255);
   ws2812b_set_brightness(WS2812B_LED_LEFT, 30);
   ws2812b_set_brightness(WS2812B_LED_RIGHT, 30);
   ws2812b_update();
+
+  sd_card_spi_test();
 
   while (1)
   {

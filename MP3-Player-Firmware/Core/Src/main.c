@@ -129,7 +129,10 @@ int main(void)
   ws2812b_set_brightness(WS2812B_LED_RIGHT, 30);
   ws2812b_update();
 
-  sd_card_spi_test();
+  uint8_t block_zero_test[SD_CARD_SPI_BLOCK_SIZE] = {0};
+  sd_card_spi_status_e err = sd_card_spi_read_block(0, block_zero_test);
+  if (err)
+    __NOP();
 
   while (1)
   {

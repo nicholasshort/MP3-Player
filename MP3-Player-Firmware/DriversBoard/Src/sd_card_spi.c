@@ -396,3 +396,27 @@ sd_card_spi_status_e sd_card_spi_read_block(uint32_t block_index, uint8_t* buffe
 }
 
 
+// TODO: Use CMD18 instead of repeated read_block requests
+sd_card_spi_status_e sd_card_spi_read_blocks(uint32_t start_block_index, uint8_t* buffer, uint32_t block_count) {
+
+    if (!initialized)
+        return SD_CARD_SPI_STATUS_ERR_NOT_INITIALIZED;
+
+    if (buffer == NULL)
+        return SD_CARD_SPI_STATUS_ERR_INVALID_ARGUMENT;
+
+    if (block_count == 0u)
+        return SD_CARD_SPI_STATUS_OK;
+    
+    sd_card_spi_status_e status;
+    for (uint32_t i = 0; i < block_count; i++) {
+        status = sd_card_spi_read_block(start_block_index + i, &buffer[i * SD_CARD_SPI_BLOCK_SIZE]);
+        if (status != SD_CARD_SPI_STATUS_OK)
+            return status;
+    }
+
+    return SD_CARD_SPI_STATUS_OK;
+
+}
+
+

@@ -136,7 +136,9 @@ int main(void)
     HAL_Delay(100);
     HAL_NVIC_SystemReset();
   }
-      
+
+
+  // Test Read Block    
   uint8_t block_zero[SD_CARD_SPI_BLOCK_SIZE];
 
   // Read Block0 10k times and ensure bytes 510, 511 are 0x55, 0xAA to ensure clock speed isn't too fast
@@ -148,6 +150,12 @@ int main(void)
     if (block_zero[510] != 0x55 || block_zero[511] != 0xAA)
       Error_Handler();
   }
+
+  // Test Read Blocks
+  uint8_t big_block[SD_CARD_SPI_BLOCK_SIZE * 5];
+  err = sd_card_spi_read_blocks(0, big_block, 5);
+  if (err != SD_CARD_SPI_STATUS_OK)
+    Error_Handler();
 
   while (1)
   {

@@ -20,6 +20,7 @@
 #include "main.h"
 #include "adc.h"
 #include "dma.h"
+#include "fatfs.h"
 #include "i2c.h"
 #include "i2s.h"
 #include "spi.h"
@@ -109,6 +110,7 @@ int main(void)
   MX_TIM2_Init();
   MX_USB_OTG_FS_PCD_Init();
   MX_ADC1_Init();
+  MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
   bq24259_init();
   buttons_init();
@@ -136,27 +138,35 @@ int main(void)
     HAL_Delay(100);
     HAL_NVIC_SystemReset();
   }
-
-
-  // Test Read Block    
-  uint8_t block_zero[SD_CARD_SPI_BLOCK_SIZE];
-
-  // Read Block0 10k times and ensure bytes 510, 511 are 0x55, 0xAA to ensure clock speed isn't too fast
-  for (int i = 0; i < 100; i++) {
-    memset(block_zero, 0, SD_CARD_SPI_BLOCK_SIZE);
-    err = sd_card_spi_read_block(0, block_zero);
-    if (err != SD_CARD_SPI_STATUS_OK)
-      Error_Handler();
-    if (block_zero[510] != 0x55 || block_zero[511] != 0xAA)
-      Error_Handler();
+  
+  // Test FatFs
+  FATFS fs;
+  DIR dir;
+  FILINFO fno;
+  FRESULT fr;
+  fr = f_mount(&fs, "", 1);
+  if (fr != FR_OK) {
+      HAL_Delay(100);
+      HAL_NVIC_SystemReset();
   }
-
-  // Test Read Blocks
-  uint8_t big_block[SD_CARD_SPI_BLOCK_SIZE * 5];
-  err = sd_card_spi_read_blocks(0, big_block, 5);
-  if (err != SD_CARD_SPI_STATUS_OK)
+  
+  fr = f_opendir(&dir, "/");
+  if (fr != FR_OK)
     Error_Handler();
 
+  while (1) {
+    fr = f_readdir(&dir, &fno);
+    
+    if (fr != FR_OK)
+      Error_Handler();
+    
+    __NOP(); // Observe fno.fname here
+    
+    if (fno.fname[0] == '\0')
+      break;
+  }
+  f_closedir(&dir);
+  
   while (1)
   {
     // bq24259_read_status(&status);

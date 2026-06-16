@@ -179,6 +179,23 @@ static inline uint32_t get_card_address(uint32_t block_address) {
 
 }
 
+// SPI2 lives on Slower APB1 Bus with max clock speed of 48MHz.
+// Min Prescaler is 2, meaning SPI clock runs 24MHz at full speed. 
+static bool speed_up_clock(void) {
+
+    ncs_high();
+    
+    if (HAL_SPI_DeInit(SPI_HANDLE) != HAL_OK)
+        return false;
+    
+    SPI_HANDLE->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_256;
+
+    if (HAL_SPI_Init(SPI_HANDLE) != HAL_OK)
+        return false;
+
+    return true;
+
+}
 
 bool sd_card_spi_card_is_inserted() {
     return (HAL_GPIO_ReadPin(SD_CARD_NCD_GPIO_Port, SD_CARD_NCD_Pin) == false);
@@ -301,9 +318,12 @@ sd_card_spi_status_e sd_card_spi_init() {
     ok &= end_transaction();
     if (!ok)
         return SD_CARD_SPI_STATUS_ERR_SPI;
-    high_capacity_card = (ocr[0] & 0x40); // Check 30th bit for CCS
+    high_capacity_card = ((ocr[0] & 0x40) != 0); // Check 30th bit for CCS
     
-    // TODO: Increase SPI Clock speed here
+    // Run SPI at max speed (187.5 kHz -> 24MHz)
+    ok = speed_up_clock();
+    if (!ok)
+        return SD_CARD_SPI_STATUS_ERR_SPI;
 
     initialized = true;
 
@@ -316,7 +336,6 @@ sd_card_spi_status_e sd_card_spi_init() {
 #define SD_READ_BLOCK_START_TOKEN  0xFEu
 
 #define SD_READ_BLOCK_TIMEOUT_MS   1000u
-
 
 sd_card_spi_status_e sd_card_spi_read_block(uint32_t block_index, uint8_t* buffer) {
 

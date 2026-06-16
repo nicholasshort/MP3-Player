@@ -36,6 +36,7 @@
 #include "sd_card_spi.h"
 
 #include <stdint.h>
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -113,7 +114,7 @@ int main(void)
   buttons_init();
   status_leds_init();
   ws2812b_init();
-  sd_card_spi_init();
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -129,10 +130,24 @@ int main(void)
   ws2812b_set_brightness(WS2812B_LED_RIGHT, 30);
   ws2812b_update();
 
-  uint8_t block_zero_test[SD_CARD_SPI_BLOCK_SIZE] = {0};
-  sd_card_spi_status_e err = sd_card_spi_read_block(0, block_zero_test);
-  if (err)
-    __NOP();
+  // SD Card bus unstable on powerup. Reset works each time
+  sd_card_spi_status_e err = sd_card_spi_init();
+  if (err != SD_CARD_SPI_STATUS_OK) {
+    HAL_Delay(100);
+    HAL_NVIC_SystemReset();
+  }
+      
+  uint8_t block_zero[SD_CARD_SPI_BLOCK_SIZE];
+
+  // Read Block0 10k times and ensure bytes 510, 511 are 0x55, 0xAA to ensure clock speed isn't too fast
+  for (int i = 0; i < 100; i++) {
+    memset(block_zero, 0, SD_CARD_SPI_BLOCK_SIZE);
+    err = sd_card_spi_read_block(0, block_zero);
+    if (err != SD_CARD_SPI_STATUS_OK)
+      Error_Handler();
+    if (block_zero[510] != 0x55 || block_zero[511] != 0xAA)
+      Error_Handler();
+  }
 
   while (1)
   {

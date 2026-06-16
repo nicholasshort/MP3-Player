@@ -28,5 +28,6 @@ sd_card_spi_status_e sd_card_spi_init(void);
 sd_card_spi_status_e sd_card_spi_read_block(uint32_t block_index, uint8_t* buffer);
 sd_card_spi_status_e sd_card_spi_read_blocks(uint32_t start_block_index, uint8_t* buffer, uint32_t block_count);
 bool sd_card_spi_card_is_inserted(void);
+bool sd_card_spi_is_initialized(void);
 
 #endif // SD_CARD_SPI_H

@@ -201,6 +201,9 @@ bool sd_card_spi_card_is_inserted() {
     return (HAL_GPIO_ReadPin(SD_CARD_NCD_GPIO_Port, SD_CARD_NCD_Pin) == false);
 }
 
+bool sd_card_spi_is_initialized() {
+    return initialized;
+}
 
 #define SD_CMD_CMD0                 0u
 #define SD_CMD0_ARG                 0u

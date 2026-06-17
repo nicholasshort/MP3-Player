@@ -62,6 +62,7 @@ DriversBoard/Src/buttons.c \
 DriversBoard/Src/status_leds.c \
 DriversBoard/Src/ws2812b.c \
 DriversBoard/Src/sd_card_spi.c \
+DriversBoard/Src/tad5242.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c \

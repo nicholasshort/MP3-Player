@@ -35,9 +35,11 @@
 #include "status_leds.h"
 #include "ws2812b.h"
 #include "sd_card_spi.h"
+#include "tad5242.h"
 
 #include <stdint.h>
 #include <string.h>
+#include <math.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -116,7 +118,7 @@ int main(void)
   buttons_init();
   status_leds_init();
   ws2812b_init();
-  
+  tad5242_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -131,13 +133,6 @@ int main(void)
   ws2812b_set_brightness(WS2812B_LED_LEFT, 30);
   ws2812b_set_brightness(WS2812B_LED_RIGHT, 30);
   ws2812b_update();
-
-  // SD Card bus unstable on powerup. Reset works each time
-  sd_card_spi_status_e err = sd_card_spi_init();
-  if (err != SD_CARD_SPI_STATUS_OK) {
-    HAL_Delay(100);
-    HAL_NVIC_SystemReset();
-  }
   
   // Test FatFs
   FATFS fs;
@@ -166,6 +161,8 @@ int main(void)
       break;
   }
   f_closedir(&dir);
+
+  tad5242_start();
   
   while (1)
   {
@@ -174,6 +171,18 @@ int main(void)
     // HAL_Delay(1000);
     buttons_update_state_poll_1ms();
     status_leds_update_1ms();
+
+    int32_t* buffer;
+    uint32_t frame_count;
+    if (tad5242_get_audio_buffer(&buffer, &frame_count) == TAD5242_STREAM_OK) {
+        for (uint32_t i = 0; i < frame_count; i++) {
+            float sampling_period = (1.0f / TAD5242_SAMPLE_RATE_HZ);
+            uint16_t wave_freq_hz = 1000u; 
+            buffer[2*i]   = (int32_t)(INT32_MAX * 0.1 * sinf(2*M_PI*wave_freq_hz*i*sampling_period));
+            buffer[2*i+1] = (int32_t)(INT32_MAX * 0.1 * sinf(2*M_PI*wave_freq_hz*i*sampling_period)); 
+        }
+        tad5242_commit_audio_buffer();
+    }
 
     button_event_t event;
     while(buttons_get_event(&event)) {

@@ -188,7 +188,7 @@ static bool speed_up_clock(void) {
     if (HAL_SPI_DeInit(SPI_HANDLE) != HAL_OK)
         return false;
     
-    SPI_HANDLE->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_256;
+    SPI_HANDLE->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
 
     if (HAL_SPI_Init(SPI_HANDLE) != HAL_OK)
         return false;

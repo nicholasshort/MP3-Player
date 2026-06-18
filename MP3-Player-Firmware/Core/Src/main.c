@@ -135,9 +135,11 @@ int main(void)
   ws2812b_update();
   
   // Test FatFs
-  FATFS fs;
-  DIR dir;
-  FILINFO fno;
+#define LORN_WAV_DATA_CHUNK_OFFSET 204
+#define LORN_WAV_DATA_CHUNK_SIZE   8155940
+#define LORN_WAV_DATA_CHUNK_END    8156144
+  FATFS fs; // Logical Drive
+  FIL file;
   FRESULT fr;
   fr = f_mount(&fs, "", 1);
   if (fr != FR_OK) {
@@ -145,54 +147,61 @@ int main(void)
       HAL_NVIC_SystemReset();
   }
   
-  fr = f_opendir(&dir, "/");
+  fr = f_open(&file, "lorn_drawn_out_like_an_ache.wav", FA_READ);
   if (fr != FR_OK)
     Error_Handler();
 
-  while (1) {
-    fr = f_readdir(&dir, &fno);
-    
-    if (fr != FR_OK)
-      Error_Handler();
-    
-    __NOP(); // Observe fno.fname here
-    
-    if (fno.fname[0] == '\0')
-      break;
-  }
-  f_closedir(&dir);
+  fr = f_lseek(&file, LORN_WAV_DATA_CHUNK_OFFSET); // Move cursor to start of data chunk
+  if (fr != FR_OK)
+    Error_Handler();
 
   tad5242_start();
+
+  bool get_new_audio = true;
+  static int16_t pcm[2048]; 
   
   while (1)
   {
-    // bq24259_read_status(&status);
-    // bq24259_read_current_fault(&fault);
-    // HAL_Delay(1000);
-    buttons_update_state_poll_1ms();
-    status_leds_update_1ms();
+
+    if (get_new_audio) {
+        UINT bytes_read;
+        uint32_t bytes_to_read = sizeof(pcm);
+        if (bytes_to_read > LORN_WAV_DATA_CHUNK_END - f_tell(&file))
+          bytes_to_read = LORN_WAV_DATA_CHUNK_END - f_tell(&file);
+        fr = f_read(&file, pcm, bytes_to_read, &bytes_read);
+        if (fr != FR_OK) {
+          (void)tad5242_stop();
+          Error_Handler();
+        }
+        if (bytes_read < sizeof(pcm)){
+          memset((uint8_t*)pcm + bytes_read, 0, sizeof(pcm) - bytes_read);
+
+          fr = f_lseek(&file, LORN_WAV_DATA_CHUNK_OFFSET); // Return cursor pointer back to start of data chunk
+          if (fr != FR_OK)
+            Error_Handler();
+        }
+        get_new_audio = false;
+    }
+
 
     int32_t* buffer;
     uint32_t frame_count;
     if (tad5242_get_audio_buffer(&buffer, &frame_count) == TAD5242_STREAM_OK) {
-        static uint32_t n = 0;
+
         for (uint32_t i = 0; i < frame_count; i++) {
-            float sampling_period = (1.0f / TAD5242_SAMPLE_RATE_HZ);
-            uint16_t wave_freq_hz = 1000u; 
-            buffer[2*i]   = (int32_t)(INT32_MAX * 0.1 * sinf(2*M_PI*wave_freq_hz*n*sampling_period));
-            buffer[2*i+1] = (int32_t)(INT32_MAX * 0.1 * sinf(2*M_PI*wave_freq_hz*n*sampling_period)); 
-            n++;
-            if (n >= TAD5242_SAMPLE_RATE_HZ / wave_freq_hz)
-              n = 0;
+          int32_t left32  = (int32_t)(pcm[2u * i + 0u] / 10);
+          int32_t right32 = (int32_t)(pcm[2u * i + 1u] / 10);
+
+          buffer[2u * i + 0u] = (int32_t)(((uint32_t)left32) << 16);
+          buffer[2u * i + 1u] = (int32_t)(((uint32_t)right32) << 16);
         }
+
         tad5242_commit_audio_buffer();
+
+        get_new_audio = true; 
+
     }
 
-    button_event_t event;
-    while(buttons_get_event(&event)) {
-      __NOP();
-    }
-    HAL_Delay(1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

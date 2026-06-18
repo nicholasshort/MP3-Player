@@ -3,7 +3,6 @@
 #include <string.h>
 
 #define I2S_HANDLE      (&hi2s1)
-#define I2S_DMA_HANDLE  (&hdma_spi1_tx)
 
 #define AUDIO_FRAMES_PER_HALF       1024u // 1 L and 1 R sample per frame
 #define AUDIO_SAMPLES_PER_HALF      (AUDIO_FRAMES_PER_HALF * TAD5242_NUM_CHANNELS)
@@ -159,8 +158,8 @@ tad5242_stream_status_e tad5242_commit_audio_buffer(void) {
     // I2S convention is to send MSB first
     // STM32 is little endian, so in an int32, the LS HalfWord will exist before the MS HalfWord
     // We must transmit the MS Halfword first, so we need to swap these
-    uint32_t start_index = dma_to_play_first_half ? (AUDIO_HALFWORDS_PER_HALF) : 0;
-    uint32_t end_index   = dma_to_play_first_half ? (AUDIO_TOTAL_HALFWORDS) : (AUDIO_HALFWORDS_PER_HALF);
+    uint32_t start_index = first_half_loaned_out ?  0 : (AUDIO_HALFWORDS_PER_HALF);
+    uint32_t end_index   = first_half_loaned_out ?  (AUDIO_HALFWORDS_PER_HALF) : (AUDIO_TOTAL_HALFWORDS);
 
     for (uint32_t i = start_index; i < end_index; i += 2) {
         uint16_t lshw = audio_buffer.u16[i];

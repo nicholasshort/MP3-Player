@@ -53,7 +53,7 @@ tad5242_stream_status_e tad5242_start(void) {
 
     memset(audio_buffer.u16, 0, sizeof(audio_buffer.u16));
 
-    if (HAL_I2S_Transmit_DMA(I2S_HANDLE, audio_buffer.u16, AUDIO_TOTAL_HALFWORDS) != HAL_OK)
+    if (HAL_I2S_Transmit_DMA(I2S_HANDLE, audio_buffer.u16, AUDIO_TOTAL_SAMPLES) != HAL_OK)
         return TAD5242_STREAM_ERR_I2S;
 
     streaming_state = STREAM_STATE_ON;

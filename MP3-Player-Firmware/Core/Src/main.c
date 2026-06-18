@@ -175,11 +175,15 @@ int main(void)
     int32_t* buffer;
     uint32_t frame_count;
     if (tad5242_get_audio_buffer(&buffer, &frame_count) == TAD5242_STREAM_OK) {
+        static uint32_t n = 0;
         for (uint32_t i = 0; i < frame_count; i++) {
             float sampling_period = (1.0f / TAD5242_SAMPLE_RATE_HZ);
             uint16_t wave_freq_hz = 1000u; 
-            buffer[2*i]   = (int32_t)(INT32_MAX * 0.1 * sinf(2*M_PI*wave_freq_hz*i*sampling_period));
-            buffer[2*i+1] = (int32_t)(INT32_MAX * 0.1 * sinf(2*M_PI*wave_freq_hz*i*sampling_period)); 
+            buffer[2*i]   = (int32_t)(INT32_MAX * 0.1 * sinf(2*M_PI*wave_freq_hz*n*sampling_period));
+            buffer[2*i+1] = (int32_t)(INT32_MAX * 0.1 * sinf(2*M_PI*wave_freq_hz*n*sampling_period)); 
+            n++;
+            if (n >= TAD5242_SAMPLE_RATE_HZ / wave_freq_hz)
+              n = 0;
         }
         tad5242_commit_audio_buffer();
     }

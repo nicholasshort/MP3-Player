@@ -117,6 +117,25 @@ static inline uint8_t get_cmd_crc7(uint8_t cmd, uint32_t argument) {
 
 #define SD_DUMMY_READ_REQUESTS 16
 
+static bool read_r1(uint8_t* r1) {
+    
+    if (r1 == NULL)
+        return false;
+    
+    // Send DUMMY bytes waiting for R1 response byte
+    for (uint8_t i = 0; i < SD_DUMMY_READ_REQUESTS; i++) {
+        if (!txrx_byte(SD_CARD_SPI_DUMMY_BYTE, r1))
+            return false;
+        
+        if (!(*r1 >> 7))
+            return true;
+    }
+
+    *r1 = 0xFF;
+    return false;
+
+}
+
 static bool send_command_packet_and_read_r1(uint8_t cmd, uint32_t argument, uint8_t* r1) {
 
     if (r1 == NULL)
@@ -141,17 +160,7 @@ static bool send_command_packet_and_read_r1(uint8_t cmd, uint32_t argument, uint
     if (!txrx_byte(tx, r1))
         return false;
 
-    // Send DUMMY bytes waiting for R1 response byte
-    for (uint8_t i = 0; i < SD_DUMMY_READ_REQUESTS; i++) {
-        if (!txrx_byte(SD_CARD_SPI_DUMMY_BYTE, r1))
-            return false;
-        
-        if (!(*r1 >> 7))
-            return true;
-    }
-
-    *r1 = 0xFF;
-    return true;
+    return read_r1(r1);
 
 }
 
@@ -335,9 +344,7 @@ sd_card_spi_status_e sd_card_spi_init() {
 }
 
 #define SD_CMD_CMD17               17u
-
 #define SD_READ_BLOCK_START_TOKEN  0xFEu
-
 #define SD_READ_BLOCK_TIMEOUT_MS   1000u
 
 sd_card_spi_status_e sd_card_spi_read_block(uint32_t block_index, uint8_t* buffer) {
@@ -399,7 +406,10 @@ sd_card_spi_status_e sd_card_spi_read_block(uint32_t block_index, uint8_t* buffe
 }
 
 
-// TODO: Use CMD18 instead of repeated read_block requests
+#define SD_CMD_CMD18    18u
+#define SD_CMD_CMD12    12u
+#define SD_CMD12_ARG    0u
+
 sd_card_spi_status_e sd_card_spi_read_blocks(uint32_t start_block_index, uint8_t* buffer, uint32_t block_count) {
 
     if (!initialized)
@@ -410,16 +420,79 @@ sd_card_spi_status_e sd_card_spi_read_blocks(uint32_t start_block_index, uint8_t
 
     if (block_count == 0u)
         return SD_CARD_SPI_STATUS_OK;
+
+    uint8_t r1;
+    uint8_t crc_bytes[2];
     
-    sd_card_spi_status_e status;
-    for (uint32_t i = 0; i < block_count; i++) {
-        status = sd_card_spi_read_block(start_block_index + i, &buffer[i * SD_CARD_SPI_BLOCK_SIZE]);
-        if (status != SD_CARD_SPI_STATUS_OK)
-            return status;
+    uint32_t blocks_read = 0;
+    while (blocks_read < block_count) {
+
+        uint32_t address = get_card_address(start_block_index + blocks_read);
+
+        // Send CMD18
+        bool ok = start_transaction();
+        ok &= send_command_packet_and_read_r1(SD_CMD_CMD18, address, &r1);
+        if (!ok) {
+            end_transaction();
+            return SD_CARD_SPI_STATUS_ERR_SPI;
+        }
+        if (r1 != SD_R1_READY_STATE) {
+            end_transaction();
+            return SD_CARD_SPI_STATUS_ERR_CMD18; 
+        }
+
+        uint8_t rx;
+        uint32_t start_ms = HAL_GetTick();
+        do {
+
+            ok = txrx_byte(SD_CARD_SPI_DUMMY_BYTE, &rx);
+            if (!ok){
+                end_transaction();
+                return SD_CARD_SPI_STATUS_ERR_SPI;
+            }
+
+                
+            if ((HAL_GetTick() - start_ms) > SD_READ_BLOCK_TIMEOUT_MS) {
+                end_transaction();
+                return SD_CARD_SPI_STATUS_ERR_TIMEOUT;
+            }
+    
+        } while (rx != SD_READ_BLOCK_START_TOKEN);
+
+        // Read 512 Bytes + 2 CRC bytes
+        ok =  read_buffer(buffer + (SD_CARD_SPI_BLOCK_SIZE * blocks_read), SD_CARD_SPI_BLOCK_SIZE);
+        ok &= read_buffer(crc_bytes, 2);
+
+        // TODO: Verify CRC bytes
+
+        if (!ok)
+            return SD_CARD_SPI_STATUS_ERR_SPI;
+        
+        blocks_read++;
+
     }
 
+    // Send CMD12
+    ok = send_command_packet_and_read_r1(SD_CMD_CMD12, SD_CMD12_ARG, &r1);
+    // Must discard r1 response as per "Stuff Byte Rule"
+    uint8_t tx;
+    ok &= txrx_byte(SD_CARD_SPI_DUMMY_BYTE, &tx);
+
+    ok &= 
+    if (!ok){
+        end_transaction();
+        return SD_CARD_SPI_STATUS_ERR_SPI;
+    }
+
+    
+
+
+
+    ok &= end_transaction();
+
+    if (!ok)
+        return SD_CARD_SPI_STATUS_ERR_SPI;
+    
     return SD_CARD_SPI_STATUS_OK;
 
 }
-
-

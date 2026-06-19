@@ -22,6 +22,7 @@ typedef enum {
     SD_CARD_SPI_STATUS_ERR_ACMD41,
     SD_CARD_SPI_STATUS_ERR_CMD58,
     SD_CARD_SPI_STATUS_ERR_CMD17,
+    SD_CARD_SPI_STATUS_ERR_CMD18,
 } sd_card_spi_status_e;
 
 sd_card_spi_status_e sd_card_spi_init(void);

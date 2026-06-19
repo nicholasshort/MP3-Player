@@ -220,14 +220,13 @@ int main(void)
         if (status == TAD5242_STREAM_OK) {
           commit_ok_total++;
           __NOP();
+          get_new_audio = true; 
         }
         else if (status == TAD5242_STREAM_ERR_UNDERRUN) {
           commit_underrun_total++;
           __NOP();
+          get_new_audio = false;
         }
-        else if (status == BUFFER_FULL)
-
-        get_new_audio = true; 
 
     }
 

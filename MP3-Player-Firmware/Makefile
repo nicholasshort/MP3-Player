@@ -63,6 +63,7 @@ DriversBoard/Src/status_leds.c \
 DriversBoard/Src/ws2812b.c \
 DriversBoard/Src/sd_card_spi.c \
 DriversBoard/Src/tad5242.c \
+App/Src/timing.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c \
@@ -155,7 +156,6 @@ C_DEFS =  \
 -DUSE_HAL_DRIVER \
 -DSTM32F411xE
 
-
 # AS includes
 AS_INCLUDES = 
 
@@ -163,6 +163,7 @@ AS_INCLUDES =
 C_INCLUDES =  \
 -ICore/Inc \
 -IDriversBoard/Inc \
+-IApp/Inc \
 -IDrivers/STM32F4xx_HAL_Driver/Inc \
 -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy \
 -IDrivers/CMSIS/Device/ST/STM32F4xx/Include \

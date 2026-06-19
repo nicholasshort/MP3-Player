@@ -4,7 +4,7 @@
 
 #define I2S_HANDLE      (&hi2s1)
 
-#define AUDIO_FRAMES_PER_HALF       1024u // 1 L and 1 R sample per frame
+#define AUDIO_FRAMES_PER_HALF       4096u // 1 L and 1 R sample per frame
 #define AUDIO_SAMPLES_PER_HALF      (AUDIO_FRAMES_PER_HALF * TAD5242_NUM_CHANNELS)
 #define AUDIO_HALFWORDS_PER_HALF    (AUDIO_SAMPLES_PER_HALF * 2u)
 #define AUDIO_TOTAL_SAMPLES         (AUDIO_SAMPLES_PER_HALF * 2u)
@@ -137,22 +137,11 @@ tad5242_stream_status_e tad5242_commit_audio_buffer(void) {
     if (dma_to_play_first_half == first_half_loaned_out)
         return TAD5242_STREAM_ERR_UNDERRUN;
 
-    if (dma_to_play_first_half) {
-        
-        if (!second_half_empty)
-            return TAD5242_STREAM_BUFFER_FULL;
-        
-        second_half_empty = false;
-
-    }
-    else {
-
-        if (!first_half_empty)
-            return TAD5242_STREAM_BUFFER_FULL;
-        
-        first_half_empty = false;
-
-    }
+    if (first_half_loaned_out && !first_half_empty)
+        return TAD5242_STREAM_BUFFER_FULL;
+    
+    if (!first_half_loaned_out && !second_half_empty)
+        return TAD5242_STREAM_BUFFER_FULL;
 
 
     // I2S convention is to send MSB first
@@ -168,6 +157,11 @@ tad5242_stream_status_e tad5242_commit_audio_buffer(void) {
         audio_buffer.u16[i]     = mshw;
         audio_buffer.u16[i+1]   = lshw;
     }
+    
+    if (first_half_loaned_out)
+        first_half_empty = false;
+    else
+        second_half_empty = false;
         
     return TAD5242_STREAM_OK;
 

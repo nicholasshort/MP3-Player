@@ -36,10 +36,10 @@
 #include "ws2812b.h"
 #include "sd_card_spi.h"
 #include "tad5242.h"
+#include "timing.h"
 
 #include <stdint.h>
 #include <string.h>
-#include <math.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -113,12 +113,14 @@ int main(void)
   MX_USB_OTG_FS_PCD_Init();
   MX_ADC1_Init();
   MX_FATFS_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
   bq24259_init();
   buttons_init();
   status_leds_init();
   ws2812b_init();
   tad5242_init();
+  timing_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -158,12 +160,19 @@ int main(void)
   tad5242_start();
 
   bool get_new_audio = true;
-  static int16_t pcm[2048]; 
+  static int16_t pcm[8192]; 
+
+  uint32_t volatile get_audio_time_us = 0;
+  uint32_t volatile buffer_fill_time_us = 0;
   
   while (1)
   {
-
+    
     if (get_new_audio) {
+
+        stopwatch_t stopwatch;
+        stopwatch_start(&stopwatch);
+
         UINT bytes_read;
         uint32_t bytes_to_read = sizeof(pcm);
         if (bytes_to_read > LORN_WAV_DATA_CHUNK_END - f_tell(&file))
@@ -181,13 +190,18 @@ int main(void)
             Error_Handler();
         }
         get_new_audio = false;
+
+        get_audio_time_us = stopwatch_end(&stopwatch);
     }
 
 
     int32_t* buffer;
     uint32_t frame_count;
     if (tad5242_get_audio_buffer(&buffer, &frame_count) == TAD5242_STREAM_OK) {
-
+        
+        stopwatch_t stopwatch;
+        stopwatch_start(&stopwatch);
+        
         for (uint32_t i = 0; i < frame_count; i++) {
           int32_t left32  = (int32_t)(pcm[2u * i + 0u] / 10);
           int32_t right32 = (int32_t)(pcm[2u * i + 1u] / 10);
@@ -195,8 +209,23 @@ int main(void)
           buffer[2u * i + 0u] = (int32_t)(((uint32_t)left32) << 16);
           buffer[2u * i + 1u] = (int32_t)(((uint32_t)right32) << 16);
         }
+        
+        static uint32_t commit_ok_total;
+        static uint32_t commit_underrun_total = 0;
+        
+        tad5242_stream_status_e status = tad5242_commit_audio_buffer();
+        
+        buffer_fill_time_us = stopwatch_end(&stopwatch);
 
-        tad5242_commit_audio_buffer();
+        if (status == TAD5242_STREAM_OK) {
+          commit_ok_total++;
+          __NOP();
+        }
+        else if (status == TAD5242_STREAM_ERR_UNDERRUN) {
+          commit_underrun_total++;
+          __NOP();
+        }
+        else if (status == BUFFER_FULL)
 
         get_new_audio = true; 
 

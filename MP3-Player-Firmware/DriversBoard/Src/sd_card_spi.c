@@ -10,7 +10,8 @@
 #define SPI_HANDLE (&hspi2)
 #define SPI_TIMEOUT_MS 1000u
 
-#define SD_CARD_SPI_DUMMY_BYTE 0xFFu
+#define SD_CARD_SPI_DUMMY_BYTE                  0xFFu
+#define SD_CARD_SPI_IDLE_LINE_RESPONSE_BYTE     0xFFu
 
 static bool initialized = false;
 static bool high_capacity_card = false;
@@ -127,7 +128,7 @@ static bool read_r1(uint8_t* r1) {
         if (!txrx_byte(SD_CARD_SPI_DUMMY_BYTE, r1))
             return false;
         
-        if (!(*r1 >> 7))
+        if (!(*r1 >> 7)) // Valid R1 will have bit 7 == 0; if not, it's an idle byte (0xFF)
             return true;
     }
 
@@ -136,28 +137,40 @@ static bool read_r1(uint8_t* r1) {
 
 }
 
-static bool send_command_packet_and_read_r1(uint8_t cmd, uint32_t argument, uint8_t* r1) {
+static bool send_command_packet(uint8_t cmd, uint32_t argument, uint8_t* rx) {
 
-    if (r1 == NULL)
+    if (rx == NULL)
         return false;
 
     uint8_t tx;
     
     // Send Command Byte
     tx = 0x40 | (cmd & 0x3F);
-    if (!txrx_byte(tx, r1))
+    if (!txrx_byte(tx, rx))
         return false;
     
     for (uint8_t i = 0; i < 4; i++) {
         tx = (uint8_t)(argument >> (8*(3-i)));
-        if (!txrx_byte(tx, r1))
+        if (!txrx_byte(tx, rx))
             return false;  
     }
 
     uint8_t crc = get_cmd_crc7(cmd, argument);
 
     tx = (uint8_t)((crc << 1) | 0x01);
-    if (!txrx_byte(tx, r1))
+    if (!txrx_byte(tx, rx))
+        return false;
+    
+    return true;
+
+}
+
+static bool send_command_packet_and_read_r1(uint8_t cmd, uint32_t argument, uint8_t* r1) {
+
+    if (r1 == NULL)
+        return false;
+
+    if (!send_command_packet(cmd, argument, r1))
         return false;
 
     return read_r1(r1);
@@ -406,9 +419,10 @@ sd_card_spi_status_e sd_card_spi_read_block(uint32_t block_index, uint8_t* buffe
 }
 
 
-#define SD_CMD_CMD18    18u
-#define SD_CMD_CMD12    12u
-#define SD_CMD12_ARG    0u
+#define SD_CMD_CMD18                18u
+#define SD_CMD_CMD12                12u
+#define SD_CMD12_ARG                0u
+#define SD_CMD12_BUSY_TIMEOUT_MS    1000u
 
 sd_card_spi_status_e sd_card_spi_read_blocks(uint32_t start_block_index, uint8_t* buffer, uint32_t block_count) {
 
@@ -423,23 +437,23 @@ sd_card_spi_status_e sd_card_spi_read_blocks(uint32_t start_block_index, uint8_t
 
     uint8_t r1;
     uint8_t crc_bytes[2];
+
+    uint32_t address = get_card_address(start_block_index);
+
+    // Send CMD18
+    bool ok = start_transaction();
+    ok &= send_command_packet_and_read_r1(SD_CMD_CMD18, address, &r1);
+    if (!ok) {
+        end_transaction();
+        return SD_CARD_SPI_STATUS_ERR_SPI;
+    }
+    if (r1 != SD_R1_READY_STATE) {
+        end_transaction();
+        return SD_CARD_SPI_STATUS_ERR_CMD18; 
+    }
     
     uint32_t blocks_read = 0;
     while (blocks_read < block_count) {
-
-        uint32_t address = get_card_address(start_block_index + blocks_read);
-
-        // Send CMD18
-        bool ok = start_transaction();
-        ok &= send_command_packet_and_read_r1(SD_CMD_CMD18, address, &r1);
-        if (!ok) {
-            end_transaction();
-            return SD_CARD_SPI_STATUS_ERR_SPI;
-        }
-        if (r1 != SD_R1_READY_STATE) {
-            end_transaction();
-            return SD_CARD_SPI_STATUS_ERR_CMD18; 
-        }
 
         uint8_t rx;
         uint32_t start_ms = HAL_GetTick();
@@ -465,28 +479,57 @@ sd_card_spi_status_e sd_card_spi_read_blocks(uint32_t start_block_index, uint8_t
 
         // TODO: Verify CRC bytes
 
-        if (!ok)
+        if (!ok) {
+            end_transaction();
             return SD_CARD_SPI_STATUS_ERR_SPI;
-        
+        }
+            
         blocks_read++;
 
     }
 
     // Send CMD12
-    ok = send_command_packet_and_read_r1(SD_CMD_CMD12, SD_CMD12_ARG, &r1);
-    // Must discard r1 response as per "Stuff Byte Rule"
+    /*
+        When a multi-block read (CMD18) is active, the card continuously loops data blocks onto the MISO line. 
+        The moment you transmit CMD12 on the MOSI line to stop it, the card requires an exact delay of 1 "Stuff Byte" 
+        (8 clock cycles) after the end of the command packet before it switches gears, halts the data loop, and 
+        presents the R1 response.
+    */
+    ok = send_command_packet(SD_CMD_CMD12, SD_CMD12_ARG, &r1);
+    // Must discard response as per "Stuff Byte Rule"
     uint8_t tx;
     ok &= txrx_byte(SD_CARD_SPI_DUMMY_BYTE, &tx);
 
-    ok &= 
+    ok &= read_r1(&r1);
+
     if (!ok){
         end_transaction();
         return SD_CARD_SPI_STATUS_ERR_SPI;
     }
 
-    
+    if (r1 != SD_R1_READY_STATE) {
+        end_transaction();
+        return SD_CARD_SPI_STATUS_ERR_CMD12;
+    }
 
+    // Poll until card asserts "Idle Line State". 
+    // Internally, card is turning off read pipelines and we need to wait for this to complete
+    uint8_t rx;
+    uint32_t start_ms = HAL_GetTick();
+    do {
 
+        ok = txrx_byte(SD_CARD_SPI_DUMMY_BYTE, &rx);
+        if (!ok){
+            end_transaction();
+            return SD_CARD_SPI_STATUS_ERR_SPI;
+        }
+
+        if ((HAL_GetTick() - start_ms) > SD_CMD12_BUSY_TIMEOUT_MS) {
+            end_transaction();
+            return SD_CARD_SPI_STATUS_ERR_TIMEOUT;
+        }
+
+    } while (rx != SD_CARD_SPI_IDLE_LINE_RESPONSE_BYTE);
 
     ok &= end_transaction();
 

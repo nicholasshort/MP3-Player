@@ -4,15 +4,15 @@
 
 #define I2S_HANDLE      (&hi2s1)
 
-#define AUDIO_FRAMES_PER_HALF       4096u // 1 L and 1 R sample per frame
+#define AUDIO_FRAMES_PER_HALF       2048u // 1 L and 1 R sample per frame
 #define AUDIO_SAMPLES_PER_HALF      (AUDIO_FRAMES_PER_HALF * TAD5242_NUM_CHANNELS)
 #define AUDIO_HALFWORDS_PER_HALF    (AUDIO_SAMPLES_PER_HALF * 2u)
 #define AUDIO_TOTAL_SAMPLES         (AUDIO_SAMPLES_PER_HALF * 2u)
 #define AUDIO_TOTAL_HALFWORDS       (AUDIO_TOTAL_SAMPLES * 2u)
 
 typedef union {
-    int32_t     i32[AUDIO_TOTAL_SAMPLES];      // Abstracted buffer to be "loaned out" via get_audio_buffer
-    uint16_t    u16[AUDIO_TOTAL_HALFWORDS]; // Properly formatted buffer for DMA (I2S register is 16bit)   
+    int32_t     i32[AUDIO_TOTAL_SAMPLES];       // Abstracted buffer to be "loaned out" via get_audio_buffer
+    uint16_t    u16[AUDIO_TOTAL_HALFWORDS];     // Properly formatted buffer for DMA (I2S register is 16bit)   
 } audio_buffer_u;
 
 static audio_buffer_u audio_buffer; // Use Ping Pong audio buffer

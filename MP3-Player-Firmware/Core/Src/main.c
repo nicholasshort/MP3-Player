@@ -174,32 +174,21 @@ int main(void)
         stopwatch_t stopwatch;
         stopwatch_start(&stopwatch);
 
-        // UINT bytes_read;
-        // uint32_t bytes_to_read = sizeof(pcm);
-        // if (bytes_to_read > LORN_WAV_DATA_CHUNK_END - f_tell(&file))
-        //   bytes_to_read = LORN_WAV_DATA_CHUNK_END - f_tell(&file);
-        // fr = f_read(&file, pcm, bytes_to_read, &bytes_read);
-        // if (fr != FR_OK) {
-        //   (void)tad5242_stop();
-        //   Error_Handler();
-        // }
-        // if (bytes_read < sizeof(pcm)){
-        //   memset((uint8_t*)pcm + bytes_read, 0, sizeof(pcm) - bytes_read);
+        UINT bytes_read;
+        uint32_t bytes_to_read = sizeof(pcm);
+        if (bytes_to_read > LORN_WAV_DATA_CHUNK_END - f_tell(&file))
+          bytes_to_read = LORN_WAV_DATA_CHUNK_END - f_tell(&file);
+        fr = f_read(&file, pcm, bytes_to_read, &bytes_read);
+        if (fr != FR_OK) {
+          (void)tad5242_stop();
+          Error_Handler();
+        }
+        if (bytes_read < sizeof(pcm)){
+          memset((uint8_t*)pcm + bytes_read, 0, sizeof(pcm) - bytes_read);
 
-        //   fr = f_lseek(&file, LORN_WAV_DATA_CHUNK_OFFSET); // Return cursor pointer back to start of data chunk
-        //   if (fr != FR_OK)
-        //     Error_Handler();
-        // }
-
-        static uint32_t n = 0;
-        for (uint32_t i = 0; i < 2048; i++) {
-            float sampling_period = (1.0f / TAD5242_SAMPLE_RATE_HZ);
-            uint16_t wave_freq_hz = 1000u; 
-            pcm[2*i]   = (int16_t)(INT16_MAX * sinf(2*M_PI*wave_freq_hz*n*sampling_period));
-            pcm[2*i+1] = (int16_t)(INT16_MAX * sinf(2*M_PI*wave_freq_hz*n*sampling_period)); 
-            n++;
-            if (n >= TAD5242_SAMPLE_RATE_HZ / wave_freq_hz)
-              n = 0;
+          fr = f_lseek(&file, LORN_WAV_DATA_CHUNK_OFFSET); // Return cursor pointer back to start of data chunk
+          if (fr != FR_OK)
+            Error_Handler();
         }
 
         get_new_audio = false;

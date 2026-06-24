@@ -4,7 +4,7 @@
 
 #define I2S_HANDLE      (&hi2s1)
 
-#define AUDIO_FRAMES_PER_HALF       2048u // 1 L and 1 R sample per frame
+#define AUDIO_FRAMES_PER_HALF       1024u // 1 L and 1 R sample per frame
 #define AUDIO_SAMPLES_PER_HALF      (AUDIO_FRAMES_PER_HALF * TAD5242_NUM_CHANNELS)
 #define AUDIO_HALFWORDS_PER_HALF    (AUDIO_SAMPLES_PER_HALF * 2u)
 #define AUDIO_TOTAL_SAMPLES         (AUDIO_SAMPLES_PER_HALF * 2u)

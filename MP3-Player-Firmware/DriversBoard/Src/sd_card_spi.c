@@ -16,6 +16,8 @@
 static bool initialized = false;
 static bool high_capacity_card = false;
 
+static uint8_t tx_dummy_byte_buffer[SD_CARD_SPI_BLOCK_SIZE];
+
 static inline void ncs_low(void) {
     HAL_GPIO_WritePin(SD_CARD_NCS_GPIO_Port, SD_CARD_NCS_Pin, GPIO_PIN_RESET);
 }
@@ -60,6 +62,28 @@ static bool read_buffer(uint8_t* buffer, uint32_t len) {
     for (uint32_t i = 0; i < len; i++) {
         if (!txrx_byte(SD_CARD_SPI_DUMMY_BYTE, &buffer[i]))
             return false;
+    }
+
+    return true;
+
+}
+
+static bool read_buffer_fast(uint8_t* buffer, uint16_t len) {
+
+    if (buffer == NULL)
+        return false;
+
+    while (len > 0u) {
+
+        // We can only read as many bytes as we can transmit (capped by tx_dummy_byte_buffer's length)
+        uint16_t bytes_to_read = len < sizeof(tx_dummy_byte_buffer) ? len : (uint16_t)(sizeof(tx_dummy_byte_buffer));
+
+        if (HAL_SPI_TransmitReceive(SPI_HANDLE, tx_dummy_byte_buffer, buffer, bytes_to_read, SPI_TIMEOUT_MS) != HAL_OK) 
+            return false;
+        
+        buffer += bytes_to_read;
+        len -= bytes_to_read;
+
     }
 
     return true;
@@ -350,6 +374,9 @@ sd_card_spi_status_e sd_card_spi_init() {
     if (!ok)
         return SD_CARD_SPI_STATUS_ERR_SPI;
 
+    // Initialize dummy_byte_buffer for fast block reads
+    memset(tx_dummy_byte_buffer, SD_CARD_SPI_DUMMY_BYTE, sizeof(tx_dummy_byte_buffer));
+    
     initialized = true;
 
     return SD_CARD_SPI_STATUS_OK;
@@ -404,8 +431,8 @@ sd_card_spi_status_e sd_card_spi_read_block(uint32_t block_index, uint8_t* buffe
     } while (rx != SD_READ_BLOCK_START_TOKEN);
 
     // Read 512 Bytes + 2 CRC bytes
-    ok =  read_buffer(buffer, SD_CARD_SPI_BLOCK_SIZE);
-    ok &= read_buffer(crc_bytes, 2);
+    ok =  read_buffer_fast(buffer, SD_CARD_SPI_BLOCK_SIZE);
+    ok &= read_buffer_fast(crc_bytes, 2);
 
     ok &= end_transaction();
 
@@ -474,8 +501,8 @@ sd_card_spi_status_e sd_card_spi_read_blocks(uint32_t start_block_index, uint8_t
         } while (rx != SD_READ_BLOCK_START_TOKEN);
 
         // Read 512 Bytes + 2 CRC bytes
-        ok =  read_buffer(buffer + (SD_CARD_SPI_BLOCK_SIZE * blocks_read), SD_CARD_SPI_BLOCK_SIZE);
-        ok &= read_buffer(crc_bytes, 2);
+        ok =  read_buffer_fast(buffer + (SD_CARD_SPI_BLOCK_SIZE * blocks_read), SD_CARD_SPI_BLOCK_SIZE);
+        ok &= read_buffer_fast(crc_bytes, 2);
 
         // TODO: Verify CRC bytes
 

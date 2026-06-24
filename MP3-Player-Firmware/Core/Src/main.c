@@ -161,7 +161,7 @@ int main(void)
   tad5242_start();
 
   bool get_new_audio = true;
-  static int16_t pcm[4096]; 
+  static int16_t pcm[2048]; 
 
   uint32_t volatile get_audio_time_us = 0;
   uint32_t volatile buffer_fill_time_us = 0;
@@ -187,8 +187,10 @@ int main(void)
           memset((uint8_t*)pcm + bytes_read, 0, sizeof(pcm) - bytes_read);
 
           fr = f_lseek(&file, LORN_WAV_DATA_CHUNK_OFFSET); // Return cursor pointer back to start of data chunk
-          if (fr != FR_OK)
+          if (fr != FR_OK) {
+            (void)tad5242_stop();
             Error_Handler();
+          }
         }
 
         get_new_audio = false;

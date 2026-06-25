@@ -99,7 +99,11 @@ Middlewares/Third_Party/FatFs/src/diskio.c \
 Middlewares/Third_Party/FatFs/src/ff.c \
 Middlewares/Third_Party/FatFs/src/ff_gen_drv.c \
 Middlewares/Third_Party/FatFs/src/option/syscall.c \
-Middlewares/Third_Party/FatFs/src/option/ccsbcs.c
+Middlewares/Third_Party/FatFs/src/option/ccsbcs.c \
+Middlewares/Third_Party/helix-mp3/mp3dec.c \
+Middlewares/Third_Party/helix-mp3/mp3tabs.c \
+$(wildcard Middlewares/Third_Party/helix-mp3/real/*.c) \
+BringupTests/Src/mp3_test.c \
 
 # ASM sources
 ASM_SOURCES =  \
@@ -154,7 +158,8 @@ AS_DEFS =
 # C defines
 C_DEFS =  \
 -DUSE_HAL_DRIVER \
--DSTM32F411xE
+-DSTM32F411xE \
+-DARM
 
 # AS includes
 AS_INCLUDES = 
@@ -170,7 +175,10 @@ C_INCLUDES =  \
 -IDrivers/CMSIS/Include \
 -IFATFS/Target \
 -IFATFS/App \
--IMiddlewares/Third_Party/FatFs/src
+-IMiddlewares/Third_Party/FatFs/src \
+-IMiddlewares/Third_Party/helix-mp3/pub \
+-IMiddlewares/Third_Party/helix-mp3/real \
+-IBringupTests/Inc
 
 
 # compile gcc flags

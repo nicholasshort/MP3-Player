@@ -2,8 +2,11 @@
 
 This is a simple MP3 player designed to be small, lightweight, and long-lasting. The goal is something I can bring on runs, hikes, or long trips that provides 24+ hours of music on a single charge with wired headphones. Firmware is currently in the works, with low level hardware drivers completed.
 
-![Top of the assembled board](images/board-top.jpeg)
-![Bottom of the assembled board](images/board-bottom.jpeg)
+![Assembled board](images/MP3-Player.jpg)
+
+## Block diagram
+
+![Block diagram](images/MP3-Player_Block-Diagram.jpg)
 
 ## Hardware
 

@@ -102,7 +102,19 @@ Middlewares/Third_Party/FatFs/src/option/syscall.c \
 Middlewares/Third_Party/FatFs/src/option/ccsbcs.c \
 Middlewares/Third_Party/helix-mp3/mp3dec.c \
 Middlewares/Third_Party/helix-mp3/mp3tabs.c \
-$(wildcard Middlewares/Third_Party/helix-mp3/real/*.c) \
+Middlewares/Third_Party/helix-mp3/real/bitstream.c \
+Middlewares/Third_Party/helix-mp3/real/buffers.c \
+Middlewares/Third_Party/helix-mp3/real/dct32.c \
+Middlewares/Third_Party/helix-mp3/real/dequant.c \
+Middlewares/Third_Party/helix-mp3/real/dqchan.c \
+Middlewares/Third_Party/helix-mp3/real/huffman.c \
+Middlewares/Third_Party/helix-mp3/real/hufftabs.c \
+Middlewares/Third_Party/helix-mp3/real/imdct.c \
+Middlewares/Third_Party/helix-mp3/real/polyphase.c \
+Middlewares/Third_Party/helix-mp3/real/scalfact.c \
+Middlewares/Third_Party/helix-mp3/real/stproc.c \
+Middlewares/Third_Party/helix-mp3/real/subband.c \
+Middlewares/Third_Party/helix-mp3/real/trigtabs.c \
 BringupTests/Src/mp3_test.c \
 
 # ASM sources
